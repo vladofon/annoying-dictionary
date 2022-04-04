@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { HTTP } from '@/api/http'
 
  export default {
 	 data() {
@@ -14,7 +14,7 @@ import axios from 'axios'
 		 }
 	 },
 	 created() {
-		 axios.get(`http://localhost:8080/`)
+		 HTTP.get()
 		 .then(response => {
 			 console.log(response.data)
       	this.content = response.data

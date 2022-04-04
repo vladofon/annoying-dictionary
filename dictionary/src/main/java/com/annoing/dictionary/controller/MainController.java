@@ -10,4 +10,10 @@ public class MainController {
 	public String mainPage() {
 		return "Begin...";
 	}
+
+	@GetMapping("/another")
+	public String anotherPage() {
+		return "Another mapping...";
+	}
+
 }
