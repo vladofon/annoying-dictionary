@@ -1,24 +1,32 @@
 <template>
 	<div>
-		{{ content }}
+	
+		<div v-for="word in content">
+			<div>{{ word.value }}</div>
+			<div>{{ word.context }}</div>
+			<button @click="editWord">Edit</button>
+			<button @click="deleteWord">Delete</button>
+			<hr>
+		</div>
+		
 	</div>
 </template>
 
 <script>
-import { HTTP } from '@/api/http'
+import wordApi from '@/api/word'
 
  export default {
 	 data() {
 		 return {
-			 content: ''
+			 content: []
 		 }
 	 },
-	 created() {
-		 HTTP.get()
-		 .then(response => {
-			 console.log(response.data)
-      	this.content = response.data
-    })
+	 methods: {
+		 
+	 },
+	 async created() {
+		 const response = await wordApi.list()
+		 this.content = response.data
 	 }
  }
 </script>
