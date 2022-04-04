@@ -1,8 +1,9 @@
 import { api } from '@/api/api-resource'
 
 export default {
-	create: word => api.post('words/create', {word}),
-	update: word => api.post('words/update', {word}),
+	create: word => api.post('words/create', word),
+	edit: word => api.post('words/edit', word),
 	list: () => api.get('words'),
-	get: id => api.get('words', {params: { id }})
+	get: id => api.get(`words/${id}`),
+	remove: id => api.delete(`words/${id}`)
 }
