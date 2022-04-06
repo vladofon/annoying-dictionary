@@ -1,5 +1,5 @@
 <template>
-	<v-card class="mt-5"
+	<v-card class="mt-5 pa-4"
 		elevation="5">
 		
     <v-row>

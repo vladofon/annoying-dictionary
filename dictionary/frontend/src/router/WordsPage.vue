@@ -1,26 +1,18 @@
 <template>
 	<word-form />
-	<word-card />
-	<word-card />
-	<word-card />
-	<word-card />
-	<word-card />
-	<word-card />
-	<word-card />
-	<word-card />
-	<word-card />
-	<word-card />
+	<word-list />
 </template>
 
 <script>
 	import WordForm from '@/components/word/WordForm.vue'
-	import WordCard from '@/components/word/WordCard.vue'
+	import WordList from '@/components/word/WordList.vue'
+	
 	
 	export default {
 		name: 'words-page',
 		components: {
 			WordForm,
-			WordCard
+			WordList
 		}	
 	}
 	
