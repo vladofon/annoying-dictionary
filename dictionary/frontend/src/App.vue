@@ -1,7 +1,7 @@
 <template>
 	<v-app> 
 		<app-bar /> 
-		<v-main> 
+		<v-main class="main"> 
 			<router-view>
 			
 			</router-view>
@@ -22,3 +22,9 @@ export default {
   },
 }
 </script>
+
+<style>
+	.main {
+		background-color: #f0f0f0;
+	}
+</style>

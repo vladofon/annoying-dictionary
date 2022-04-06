@@ -6,7 +6,7 @@
 				<h3 class="text-white" style="margin: auto 0">Words set</h3>
 				<v-spacer></v-spacer>
 				<div>
-					<v-btn rounded="pill" class="text-black">
+					<v-btn @click="switchDialog(true)" rounded="pill" class="text-black">
 						<v-icon color="black">mdi-plus</v-icon>
 						Add new
 					</v-btn>
@@ -18,7 +18,15 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 
+export default {
+		methods: {
+			...mapMutations({
+				switchDialog: 'word/switchDialog'
+			})
+		}
+	}
 </script>
 
 <style>
