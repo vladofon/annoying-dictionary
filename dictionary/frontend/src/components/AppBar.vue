@@ -14,7 +14,7 @@
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       </template>
 
-      <v-app-bar-title>Title</v-app-bar-title>
+      <v-app-bar-title>dictionary</v-app-bar-title>
 
       <v-spacer></v-spacer>
 

@@ -1,8 +1,10 @@
 <template>
-	<v-app class="d-flex"> 
+	<v-app> 
 		<app-bar /> 
 		<v-main> 
-
+			<router-view>
+			
+			</router-view>
 		</v-main> 
 		<app-footer />
 	</v-app>
