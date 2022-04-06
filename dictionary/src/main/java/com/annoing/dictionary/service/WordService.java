@@ -23,4 +23,8 @@ public class WordService {
 		return wordRepo.save(word);
 	}
 
+	public void remove(Long id) {
+		wordRepo.deleteById(id);
+	}
+
 }
