@@ -1,5 +1,5 @@
 <template>
-	<v-app> 
+	<v-app class="app"> 
 		<app-bar /> 
 		<v-main class="main"> 
 			<router-view>
@@ -26,5 +26,8 @@ export default {
 <style>
 	.main {
 		background-color: #f0f0f0;
+	}
+	html, body, #app, .app {
+		height: 100%;
 	}
 </style>

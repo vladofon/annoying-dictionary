@@ -1,5 +1,5 @@
 <template>
-	<v-footer class="bg-teal-darken-4">
+	<v-footer app bottom class="bg-teal-darken-4">
     <v-card
       elevation="0"
       rounded="0"
