@@ -23,7 +23,7 @@ import { mapMutations } from 'vuex'
 export default {
 		methods: {
 			...mapMutations({
-				switchDialog: 'word/switchDialog'
+				switchDialog: 'switchDialog'
 			})
 		}
 	}

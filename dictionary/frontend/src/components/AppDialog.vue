@@ -39,11 +39,11 @@
 	
 	export default {
 		computed: {
-			...mapState('word', ['isDialogActive']),
+			...mapState(['isDialogActive']),
 		},
 		methods: {
 			...mapMutations({
-				switchDialog: 'word/switchDialog'
+				switchDialog: 'switchDialog'
 			})
 		}
 	}
