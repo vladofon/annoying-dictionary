@@ -3,7 +3,7 @@
 		<template v-slot:dialog-title>
 			<span class="text-white">Add new item to set</span>
 		</template>
-		<v-text-field label="Value" variant="filled" color="teal"></v-text-field>
+		<v-text-field autofocus label="Value" variant="filled" color="teal"></v-text-field>
 		<v-textarea
 			rounded
 			color="teal"
