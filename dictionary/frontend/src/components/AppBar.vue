@@ -43,8 +43,8 @@
     <v-divider></v-divider>
 
     <v-list density="compact" nav>
-      <v-list-item prepend-icon="mdi-view-dashboard" title="Home" value="home"></v-list-item>
-      <v-list-item prepend-icon="mdi-forum" title="About" value="about"></v-list-item>
+      <v-list-item @click="$router.push('/sets')" prepend-icon="mdi-view-dashboard" title="Sets" value="sets"></v-list-item>
+      <v-list-item @click="$router.push('/words')" prepend-icon="mdi-forum" title="Words" value="words"></v-list-item>
     </v-list>
   </v-navigation-drawer>
   
