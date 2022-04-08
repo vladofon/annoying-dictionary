@@ -1,16 +1,24 @@
 <template>
 	<v-card elevation="5" width="350" class="d-flex flex-column" style="margin: 0 auto">
-		<v-container class="mt-3">
-			<v-card-subtitle class="mx-auto">
-				<v-chip class="mr-2">{{currentIndex + 1}} / {{totalCount}}</v-chip> Words passed
-			</v-card-subtitle>
-		</v-container>
+		<v-card-subtitle>
+			<v-container class="mt-3">
+				<v-row>
+					<v-col  class="pa-0">
+						<v-chip class="mr-2">{{currentIndex + 1}} / {{totalCount}}</v-chip> Words passed
+					</v-col>
+				</v-row>
+			</v-container>
+		</v-card-subtitle>
 	
-		<v-container class="pb-0">
-			<v-card-text class="full-height">
-				{{quizItem.context}}
-			</v-card-text>
-		</v-container>
+		<v-card-text class="full-height">
+			<v-container class="pb-0">
+				<v-row>
+					<v-col  class="pa-0">
+						{{quizItem.context}}
+					</v-col>
+				</v-row>
+			</v-container>
+		</v-card-text>
 
 		<v-card-actions>
 			<v-container>

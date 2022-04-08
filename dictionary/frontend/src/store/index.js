@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-
+import quizModule from '@/store/quizModule'
 
 export default createStore({
   state: {
@@ -15,6 +15,6 @@ export default createStore({
   actions: {
   },
   modules: {
-
+		quiz: quizModule
   }
 })
