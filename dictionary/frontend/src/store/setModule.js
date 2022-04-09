@@ -22,6 +22,9 @@ export default {
 	mutations: {
 		removeSet(state, id) {
 			state.sets = state.sets.filter(item => item.id !== id)
+		},
+		addSet(state, set) {
+			state.sets.push(set)
 		}
 	}
 }

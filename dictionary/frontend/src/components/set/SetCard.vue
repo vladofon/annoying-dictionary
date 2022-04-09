@@ -4,7 +4,7 @@
     width="344"
     outlined
   >
-    <v-list-item three-line>
+    <v-list-item three-line class="justify-space-between">
       <v-list-item-content>
         <div class="text-overline mb-4 d-flex align-content-center">
           <span class="align-self-center">PUBLIC SET</span>
@@ -20,6 +20,8 @@
         size="80"
         color="grey"
       ></v-list-item-avatar>
+      
+      <v-spacer></v-spacer>
       
 			<v-menu transition="scale-transition">
 				<template v-slot:activator="{ props }">
