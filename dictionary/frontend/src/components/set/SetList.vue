@@ -1,12 +1,21 @@
 <template>
-	<v-container>
-		<v-row>
-			<transition-group name="list" appear>
-				<v-col cols="4" v-for="set in sets" :key="set.id">
-					<set-card :set="set"/>
+	<v-container style="height: 80vh">
+	
+		<transition name="switch" mode="out-in">
+			<v-row v-if="sets.length">
+				<transition-group name="list" appear>
+					<v-col cols="4" v-for="set in sets" :key="set.id">
+						<set-card :set="set"/>
+					</v-col>
+				</transition-group>
+			</v-row>
+			<v-row v-else class="justify-center align-center"  style="height: 80vh">
+				<v-col class="align-self-center">
+					<h1 class="text-center" rounded>You have not any set!</h1>
 				</v-col>
-			</transition-group>
-		</v-row>
+			</v-row>
+		</transition>
+
 	</v-container>
 </template>
 
@@ -51,4 +60,19 @@
 	.list-move {
 		transition: all 0.3s ease;
 	}
+	
+	
+  .switch-enter-from,
+  .switch-leave-to {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  .switch-enter-active{
+    transition: all 0.5s ease;
+  }
+  .switch-leave-active {
+    transition: all 0.5s ease;
+    position: absolute;
+    width: 100%;
+  }
 </style>
