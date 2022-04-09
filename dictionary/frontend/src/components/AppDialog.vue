@@ -19,10 +19,7 @@
 
         <v-card-actions class="pt-3">
           <v-spacer></v-spacer>
-          <v-btn @click="switchDialog(false)"
-            color="teal" text>
-						<slot name="dialog-actions"></slot>
-          </v-btn>
+					<slot name="dialog-actions"></slot>
           <v-btn @click="switchDialog(false)"
             color="primary" text>
 						Close
