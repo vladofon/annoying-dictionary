@@ -1,7 +1,9 @@
 <template>
-	<v-container>
-		<quiz-card :quiz-item="item" :total-count="items.length">
-		</quiz-card>
+	<v-container class="d-flex align-center justify-center flex-column"  style="height: 80vh" fill-height>
+		
+			<quiz-card :quiz-item="item" :total-count="items.length"></quiz-card>
+
+		<!-- <div><v-btn @click="showP = !showP" class="mt-3" >Show card</v-btn></div> -->
 	</v-container>
 </template>
 
@@ -51,3 +53,4 @@
 	}
 
 </script>
+

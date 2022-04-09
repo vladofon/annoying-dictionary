@@ -1,5 +1,6 @@
 <template>
-	<v-card elevation="5" width="350" class="d-flex flex-column" style="margin: 0 auto">
+<transition name="bounce">
+	<v-card v-if="showP" elevation="5" width="350" class="d-flex flex-column">
 		<v-card-subtitle>
 			<v-container class="mt-3">
 				<v-row>
@@ -41,7 +42,7 @@
 				
 				<v-col cols="12" class="pb-0">
 					<div class="d-inline-block mx-10">
-						<v-btn @click="incrementCurrentIndex" color="teal">
+						<v-btn @click="nextCard" color="teal">
 							Confirm
 						</v-btn>
 						<v-btn color="red">
@@ -54,6 +55,7 @@
 			</v-container>
 		</v-card-actions>
 	</v-card>
+</transition>
 </template>
 
 <script>
@@ -61,10 +63,20 @@
 	
 	export default {
 		props: ['quizItem', 'totalCount'],
+		data() {
+			return {
+				showP: true
+			}
+		},
 		methods: {
 			...mapMutations({
 				incrementCurrentIndex: 'quiz/incrementCurrentIndex'
 			}),
+			nextCard() {
+				this.showP = false
+				this.incrementCurrentIndex()
+				setTimeout(() => {this.showP = true}, 400)
+			}
 		},
 		computed: {
 			...mapState('quiz', ['currentIndex'])
@@ -78,5 +90,23 @@
 	}
 	.v-field__field {
 		background: grey;
+	}
+	
+	.bounce-enter-active {
+		animation: bounce-in 0.5s;
+	}
+	.bounce-leave-active {
+		animation: bounce-in 0.5s reverse;
+	}
+	@keyframes bounce-in {
+		0% {
+			transform: scale(0);
+		}
+		50% {
+			transform: scale(1.25);
+		}
+		100% {
+			transform: scale(1);
+		}
 	}
 </style>

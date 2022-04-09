@@ -1,7 +1,7 @@
 <template>
 	<set-form />
 	<set-dialog />
-	<set-list />
+	<set-list/>
 </template>
 
 <script>
