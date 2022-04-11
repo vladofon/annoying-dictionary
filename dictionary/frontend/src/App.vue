@@ -6,7 +6,7 @@
 			
 			</router-view>
 		</v-main> 
-		<app-footer />
+		<app-footer/>
 	</v-app>
 </template>
 
@@ -27,7 +27,7 @@ export default {
 	.main {
 		background-color: #f0f0f0;
 	}
-	html, body, #app, .app {
-		height: 100%;
+	body {
+		background-color: teal;
 	}
 </style>

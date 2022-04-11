@@ -1,5 +1,5 @@
 <template>
-	<v-container style="height: 80vh">
+	<v-container>
 	
 		<transition name="switch" mode="out-in">
 			<v-row v-if="sets.length">
@@ -9,7 +9,7 @@
 					</v-col>
 				</transition-group>
 			</v-row>
-			<v-row v-else class="justify-center align-center"  style="height: 80vh">
+			<v-row v-else class="justify-center align-center">
 				<v-col class="align-self-center">
 					<h1 class="text-center" rounded>You have not any set!</h1>
 				</v-col>
@@ -33,7 +33,7 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	.list-enter-active {
 		transition: all 0.4s ease;
 	}
