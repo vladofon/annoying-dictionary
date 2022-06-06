@@ -21,6 +21,11 @@
 									<v-btn @click="removeWord(word.id)" class="text-red" plain>Delete</v-btn>
 								</v-list-item-title>
 							</v-list-item>
+							<v-list-item>
+								<v-list-item-title>
+									<v-btn @click="showDialog" class="text-orange" plain>Edit</v-btn>
+								</v-list-item-title>
+							</v-list-item>
 
 						</v-list>
 					</v-menu>
@@ -45,7 +50,11 @@
 	export default {
 		props: ['word'],
 		methods: {
-			...mapMutations('word', ['removeWord'])
+			...mapMutations('word', ['removeWord', 'updateWord']),
+			...mapMutations(['switchDialog']),
+			showDialog() {
+				this.switchDialog(true)
+			}
 		}
 	}
 </script>

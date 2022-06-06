@@ -25,6 +25,11 @@ export default {
 		},
 		addWord(state, word) {
 			state.words.push(word)
+		},
+		updateWord(state, word) {
+			const index = state.words.findIndex(item => item.id === word.id)
+			
+			state.words.splice(index, 1, word)
 		}
 	}
 }
