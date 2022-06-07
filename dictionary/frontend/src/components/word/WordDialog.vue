@@ -15,8 +15,8 @@
 			placeholder="Try to describe this word or phrase in a few sentences..."
 		></v-textarea>
 		<template v-slot:dialog-actions>
-			<v-btn @click="createWord" color="teal" text>
-				Add
+			<v-btn @click="wordAction" color="teal" text>
+				{{dialogMode}}
 			</v-btn>
 		</template>
 	</app-dialog>
@@ -24,31 +24,58 @@
 
 <script>
 	import AppDialog from '@/components/AppDialog.vue'
-	import { mapMutations } from 'vuex'
+	import DialogModes from '@/components/word/misc/DialogModes'
+	import { mapMutations, mapState } from 'vuex'
 	
 	export default {
 		components: {
 			AppDialog
 		},
-		data() {
-			return {
-				word: {
-					value: '',
-					context: ''
+		computed: {
+			...mapState('word', ['dialogMode', 'operableWord']),
+			word: {
+				get() {
+					return this.$store.state.word.operableWord
 				}
 			}
 		},
 		methods: {
-			...mapMutations('word', ['addWord']),
+			...mapMutations('word', ['addWord', 'updateWord', 'setOperableWord']),
 			...mapMutations(['switchDialog']),
 			createWord() {
 				this.word.id = Math.floor(Math.random() * 100000)
 				this.addWord(this.word)
 				this.switchDialog(false)
 				
-				this.word = {
+				const word = {
+					id: 0,
 					value: '',
 					context: ''
+				}
+				
+				this.setOperableWord(word)
+			},
+			editWord() {
+				this.updateWord(this.word)
+				this.switchDialog(false)
+				
+				const word = {
+					id: 0,
+					value: '',
+					context: ''
+				}
+				
+				this.setOperableWord(word)
+			},
+			wordAction() {
+				switch(this.dialogMode)
+				{
+					case DialogModes.CREATE:
+						this.createWord()
+						break
+					case DialogModes.EDIT:
+						this.editWord()
+						break
 				}
 			}
 		}
