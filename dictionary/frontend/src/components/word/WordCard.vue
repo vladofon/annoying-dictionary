@@ -23,7 +23,7 @@
 							</v-list-item>
 							<v-list-item>
 								<v-list-item-title>
-									<v-btn @click="showDialog" class="text-orange" plain>Edit</v-btn>
+									<v-btn @click="editWord" class="text-orange" plain>Edit</v-btn>
 								</v-list-item-title>
 							</v-list-item>
 
@@ -47,12 +47,17 @@
 
 <script>
 	import { mapMutations } from 'vuex'
+	import DialogModes from '@/components/word/misc/DialogModes'
+	
 	export default {
 		props: ['word'],
 		methods: {
-			...mapMutations('word', ['removeWord', 'updateWord']),
+			...mapMutations('word', ['removeWord', 'updateWord', 'setDialogMode', 'setOperableWord']),
 			...mapMutations(['switchDialog']),
-			showDialog() {
+			
+			editWord() {
+				this.setDialogMode(DialogModes.EDIT)
+				this.setOperableWord({id:this.word.id, value:this.word.value, context:this.word.context})
 				this.switchDialog(true)
 			}
 		}
