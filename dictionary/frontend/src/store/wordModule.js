@@ -1,3 +1,5 @@
+import DialogModes from '@/components/word/misc/DialogModes'
+
 export default {
 	namespaced: true,
 	state: {
@@ -17,7 +19,13 @@ export default {
 			{id: 13, value: 'Headline 13', context: 'Greyhound divisely hello coldly fonwderfully'},
 			{id: 14, value: 'Headline 14', context: 'Greyhound divisely hello coldly fonwderfully'},
 			{id: 15, value: 'Headline 15', context: 'Greyhound divisely hello coldly fonwderfully'},
-		]
+		],
+		operableWord: {
+			id: 0,
+			value: '',
+			context: ''
+		},
+		dialogMode: DialogModes.CREATE
 	},
 	mutations: {
 		removeWord(state, id) {
@@ -30,6 +38,12 @@ export default {
 			const index = state.words.findIndex(item => item.id === word.id)
 			
 			state.words.splice(index, 1, word)
+		},
+		setDialogMode(state, mode) {
+			state.dialogMode = mode;
+		},
+		setOperableWord(state, word) {
+			state.operableWord = word
 		}
 	}
 }
