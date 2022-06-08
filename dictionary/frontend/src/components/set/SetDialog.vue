@@ -1,7 +1,7 @@
 <template>
 	<app-dialog>
 		<template v-slot:dialog-title>
-			<span class="text-white">Create new set</span>
+			<span class="text-white">{{dialogMode}} set</span>
 		</template>
 		<v-text-field v-model="set.title" autofocus label="Name" variant="filled" color="teal"></v-text-field>
 		<v-textarea
@@ -15,8 +15,8 @@
 			placeholder="Enter some description..."
 		></v-textarea>
 		<template v-slot:dialog-actions>
-			<v-btn @click="createSet" color="teal" text>
-				Create
+			<v-btn @click="setAction" color="teal" text>
+				{{dialogMode}}
 			</v-btn>
 		</template>
 	</app-dialog>
@@ -24,31 +24,46 @@
 
 <script>
 	import AppDialog from '@/components/AppDialog.vue'
-	import { mapMutations } from 'vuex'
+	import DialogModes from '@/components/set/misc/DialogModes'
+	import { mapMutations, mapState } from 'vuex'
 	
 	export default {
 		components: {
 			AppDialog
 		},
-		data() {
-			return {
-				set: {
-					title: '',
-					description: ''
+		computed: {
+			set: {
+				get() {
+					return this.$store.state.set.operableSet
 				}
-			}
+			},
+			...mapState('set', ['dialogMode'])
 		},
 		methods: {
-			...mapMutations('set', ['addSet']),
+			...mapMutations('set', ['addSet', 'updateSet', 'setOperableSet']),
 			...mapMutations(['switchDialog']),
+			
 			createSet() {
 				this.set.id = Math.floor(Math.random() * 100000)
 				this.addSet(this.set)
 				this.switchDialog(false)
 				
-				this.set = {
-					title: '',
-					description: ''
+				this.setOperableSet({id:null, title:'', description: ''})
+			},
+			editSet() {
+				this.updateSet(this.set)
+				this.switchDialog(false)
+				
+				this.setOperableSet({id:null, title:'', description: ''})
+			},
+			setAction() {
+				switch(this.dialogMode) {
+				case DialogModes.CREATE:
+					this.createSet()
+					break
+				case DialogModes.EDIT:
+					this.editSet()
+					break
 				}
 			}
 		}
