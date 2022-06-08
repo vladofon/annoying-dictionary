@@ -1,3 +1,5 @@
+import DialogModes from '@/components/set/misc/DialogModes'
+
 export default {
 	namespaced: true,
 	state: {
@@ -18,9 +20,12 @@ export default {
 			{id: 14, title: 'Headline 14', description: 'Greyhound divisely hello coldly fonwderfully'},
 			{id: 15, title: 'Headline 15', description: 'Greyhound divisely hello coldly fonwderfully'},
 		],
-		createDialog: false,
-		editDialog: false,
-		editableSetIndex: -1, 
+		operableSet: {
+			id: null,
+			title: '',
+			description: ''
+		},
+		dialogMode: DialogModes.CREATE
 	},
 	mutations: {
 		removeSet(state, id) {
@@ -29,19 +34,16 @@ export default {
 		addSet(state, set) {
 			state.sets.push(set)
 		},
-		editSet(state, set) {
+		updateSet(state, set) {
 			const index = state.sets.findIndex(item => item.id === set.id)
 			
 			state.sets.splice(index, 1, set)
 		},
-		setEditableSetIndex(state, index) {
-			state.editableSetIndex = index
-		} ,
-		switchCreateDialog(state, dialog) {
-			state.createDialog = dialog
+		setOperableSet(state, set) {
+			state.operableSet = set
 		},
-		switchEditDialog(state, dialog) {
-			state.editDialog = dialog
+		setDialogMode(state, mode) {
+			state.dialogMode = mode
 		}
 	}
 }
