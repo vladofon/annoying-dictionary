@@ -1,7 +1,7 @@
 <template>
 	<app-dialog>
 		<template v-slot:dialog-title>
-			<span class="text-white">Add new item to set</span>
+			<span class="text-white">{{dialogMode}} item</span>
 		</template>
 		<v-text-field v-model="word.value" autofocus label="Value" variant="filled" color="teal"></v-text-field>
 		<v-textarea
