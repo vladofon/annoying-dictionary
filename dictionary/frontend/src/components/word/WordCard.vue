@@ -9,12 +9,12 @@
 					<v-btn flat class="ml-1" icon="mdi-volume-high"></v-btn>
 					<v-spacer></v-spacer>
 					
-					<v-menu transition="scale-transition">
+					<v-menu v-model="menu" transition="scale-transition">
 						<template v-slot:activator="{ props }">
 							<v-btn v-bind="props" flat icon="mdi-dots-vertical" class="align-self-start"></v-btn>
 						</template>
 						
-						<v-list elevation="5" rounded class="pa-0">
+						<v-list elevation="5" rounded class="pa-0" @click="menu = false">
 						
 							<v-list-item>
 								<v-list-item-title>
@@ -51,6 +51,11 @@
 	
 	export default {
 		props: ['word'],
+		data() {
+			return {
+				menu: false
+			}
+		},
 		methods: {
 			...mapMutations('word', ['removeWord', 'updateWord', 'setDialogMode', 'setOperableWord']),
 			...mapMutations(['switchDialog']),

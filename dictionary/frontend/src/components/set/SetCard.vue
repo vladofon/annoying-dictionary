@@ -5,7 +5,7 @@
     outlined
   >
     <v-list-item three-line class="justify-space-between">
-      <v-list-item-content>
+      <div>
         <div class="text-overline mb-4 d-flex align-content-center">
           <span class="align-self-center">PUBLIC SET</span>
         </div>
@@ -13,7 +13,7 @@
           {{set.title}}
         </v-list-item-title>
         <v-list-item-subtitle>{{set.description}}</v-list-item-subtitle>
-      </v-list-item-content>
+      </div>
 
       <v-list-item-avatar
         tile
@@ -23,12 +23,13 @@
       
       <v-spacer></v-spacer>
       
-			<v-menu transition="scale-transition">
+      
+			<v-menu v-model="menu" transition="scale-transition" :close-on-content-click="true">
 				<template v-slot:activator="{ props }">
 					<v-btn v-bind="props" flat icon="mdi-dots-vertical" class="align-self-start"></v-btn>
 				</template>
 				
-				<v-list elevation="5" rounded class="pa-0">
+				<v-list elevation="5" rounded class="pa-0" @click="menu = false">
 				
 					<v-list-item>
 						<v-list-item-title>
@@ -74,6 +75,11 @@
 		props: ['set'],
 		computed: {
 			...mapState('set', ['sets'])
+		},
+		data() {
+			return {
+				menu: false
+			}
 		},
 		methods: {
 			...mapMutations('set', ['removeSet', 'setOperableSet', 'setDialogMode']),
