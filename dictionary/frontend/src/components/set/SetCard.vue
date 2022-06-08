@@ -38,7 +38,7 @@
 					
 					<v-list-item>
 						<v-list-item-title>
-							<v-btn @click="showDialog" class="text-orange" plain>Edit</v-btn>
+							<v-btn @click="editSet" class="text-orange" plain>Edit</v-btn>
 						</v-list-item-title>
 					</v-list-item>
 					
@@ -68,17 +68,27 @@
 
 <script>
 	import { mapState, mapMutations } from 'vuex'
+	import DialogModes from '@/components/set/misc/DialogModes'
+	
 	export default {
 		props: ['set'],
 		computed: {
 			...mapState('set', ['sets'])
 		},
 		methods: {
-			...mapMutations('set', ['removeSet', 'setEditableSetIndex']),
+			...mapMutations('set', ['removeSet', 'setOperableSet', 'setDialogMode']),
 			...mapMutations(['switchDialog']),
-			showDialog() {
+			
+			editSet() {
+				this.setDialogMode(DialogModes.EDIT)
+				
+				this.setOperableSet({
+					id:this.set.id, 
+					title:this.set.title, 
+					description:this.set.description
+				})
+				
 				this.switchDialog(true)
-				this.setEditableSetIndex(this.set.id)
 			}
 		}
 	}
