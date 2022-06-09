@@ -23,34 +23,10 @@
       
       <v-spacer></v-spacer>
       
-      
-			<v-menu v-model="menu" transition="scale-transition" :close-on-content-click="true">
-				<template v-slot:activator="{ props }">
-					<v-btn v-bind="props" flat icon="mdi-dots-vertical" class="align-self-start"></v-btn>
-				</template>
-				
-				<v-list elevation="5" rounded class="pa-0" @click="menu = false">
-				
-					<v-list-item>
-						<v-list-item-title>
-							<v-btn @click="removeSet(set.id)" class="text-red" plain>Delete</v-btn>
-						</v-list-item-title>
-					</v-list-item>
-					
-					<v-list-item>
-						<v-list-item-title>
-							<v-btn @click="editSet" class="text-orange" plain>Edit</v-btn>
-						</v-list-item-title>
-					</v-list-item>
-					
-					<v-list-item>
-						<v-list-item-title>
-							<v-btn class="text-orange" plain>Private</v-btn>
-						</v-list-item-title>
-					</v-list-item>
-					
-				</v-list>
-			</v-menu>
+			<app-menu>
+				<app-menu-item @action="removeSet(set.id)" :color="'red'" :text="'Delete'"/>
+				<app-menu-item @action="editSet" :color="'orange'" :text="'Edit'"/>
+			</app-menu>
       
     </v-list-item>
 
@@ -70,16 +46,17 @@
 <script>
 	import { mapState, mapMutations } from 'vuex'
 	import DialogModes from '@/components/set/misc/DialogModes'
+	import AppMenu from '@/components/AppMenu.vue'
+	import AppMenuItem from '@/components/AppMenuItem.vue'
 	
 	export default {
+		components: {
+			AppMenu,
+			AppMenuItem
+		},
 		props: ['set'],
 		computed: {
 			...mapState('set', ['sets'])
-		},
-		data() {
-			return {
-				menu: false
-			}
 		},
 		methods: {
 			...mapMutations('set', ['removeSet', 'setOperableSet', 'setDialogMode']),

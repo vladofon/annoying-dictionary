@@ -9,26 +9,10 @@
 					<v-btn flat class="ml-1" icon="mdi-volume-high"></v-btn>
 					<v-spacer></v-spacer>
 					
-					<v-menu v-model="menu" transition="scale-transition">
-						<template v-slot:activator="{ props }">
-							<v-btn v-bind="props" flat icon="mdi-dots-vertical" class="align-self-start"></v-btn>
-						</template>
-						
-						<v-list elevation="5" rounded class="pa-0" @click="menu = false">
-						
-							<v-list-item>
-								<v-list-item-title>
-									<v-btn @click="removeWord(word.id)" class="text-red" plain>Delete</v-btn>
-								</v-list-item-title>
-							</v-list-item>
-							<v-list-item>
-								<v-list-item-title>
-									<v-btn @click="editWord" class="text-orange" plain>Edit</v-btn>
-								</v-list-item-title>
-							</v-list-item>
-
-						</v-list>
-					</v-menu>
+					<app-menu>
+						<app-menu-item @action="removeWord(word.id)" :color="'red'" :text="'Delete'" />
+						<app-menu-item @action="editWord" :color="'orange'" :text="'Edit'" />
+					</app-menu>
 					
 				</v-card-title>
 				<v-card-subtitle>
@@ -48,14 +32,15 @@
 <script>
 	import { mapMutations } from 'vuex'
 	import DialogModes from '@/components/word/misc/DialogModes'
+	import AppMenu from '@/components/AppMenu.vue'
+	import AppMenuItem from '@/components/AppMenuItem.vue'
 	
 	export default {
-		props: ['word'],
-		data() {
-			return {
-				menu: false
-			}
+		components: {
+			AppMenu,
+			AppMenuItem
 		},
+		props: ['word'],
 		methods: {
 			...mapMutations('word', ['removeWord', 'updateWord', 'setDialogMode', 'setOperableWord']),
 			...mapMutations(['switchDialog']),
