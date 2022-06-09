@@ -1,6 +1,6 @@
 <template>
 	<word-form/>
-	<set-header/>
+	<set-header :set="set"/>
 	<word-list/>
 	<word-dialog/>
 </template>
@@ -17,6 +17,15 @@
 			WordList,
 			WordForm,
 			WordDialog
+		},
+		data() {
+			return {
+				set: {
+					id: 103984,
+					title: 'Headline 1',
+					description: 'Greyhound divisely hello coldly fonwderfully'
+				}
+			}
 		}
 	}
 </script>
