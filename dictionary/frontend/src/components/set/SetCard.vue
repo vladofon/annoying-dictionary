@@ -39,6 +39,15 @@
       >
         Show
       </v-btn>
+      <v-spacer></v-spacer>
+			<v-chip
+				class="ma-2"
+				color="orange"
+				text-color="white"
+				append-icon="mdi-star"
+			>
+			12
+			</v-chip>
     </v-card-actions>
   </v-card>
 </template>
