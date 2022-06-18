@@ -2,6 +2,7 @@ import { createStore } from 'vuex'
 import quizModule from '@/store/quizModule'
 import setModule from '@/store/setModule'
 import wordModule from '@/store/wordModule'
+import profileModule from '@/store/profileModule'
 
 export default createStore({
   state: {
@@ -19,6 +20,7 @@ export default createStore({
   modules: {
 		quiz: quizModule,
 		set: setModule,
-		word: wordModule
+		word: wordModule,
+		profile: profileModule
   }
 })
