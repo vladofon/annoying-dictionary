@@ -6,7 +6,7 @@
 				<h3 class="text-white" style="margin: auto 0">Profile</h3>
 				<v-spacer></v-spacer>
 				<div>
-					<v-btn rounded="pill" class="text-black">
+					<v-btn @click="editProfile" rounded="pill" class="text-black">
 						<v-icon color="black">mdi-plus</v-icon>
 						Change info
 					</v-btn>
@@ -16,3 +16,19 @@
 		
 	</v-container>
 </template>
+
+<script>
+import { mapMutations } from 'vuex'
+
+export default {
+		methods: {
+			...mapMutations({
+				switchDialog: 'switchDialog'
+			}),
+			
+			editProfile() {
+				this.switchDialog(true)
+			}
+		}
+	}
+</script>
