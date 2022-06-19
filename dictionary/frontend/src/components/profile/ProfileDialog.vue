@@ -3,8 +3,9 @@
 		<template v-slot:dialog-title>
 			<span class="text-white">Edit profile</span>
 		</template>
-		<v-text-field :value="profile.name" autofocus label="Name" variant="filled" color="teal"></v-text-field>
+		<v-text-field v-model="localProfile.name" autofocus label="Name" variant="filled" color="teal"></v-text-field>
 		<v-textarea
+			v-model="localProfile.avatar"
 			rounded
 			color="teal"
 			class="bg-grey-lighten-3 pa-3 px-6 mt-n5"
@@ -13,7 +14,6 @@
 			label="Description"
 			placeholder="Enter some description..."
 		>
-		{{profile.avatar}}
 		</v-textarea>
 		<template v-slot:dialog-actions>
 			<v-btn @click="editProfile" color="teal" text>
@@ -31,19 +31,10 @@
 		components: {
 			AppDialog
 		},
-		/* data() {
-			return {
-				localProfile: {
-					name: '',
-					avatar: '',
-					status: ''
-				}
-			}
-		}, */
 		computed: {
-			profile: {
+			localProfile: {
 				get() {
-					return this.$store.state.profile.profile
+					return this.$store.state.profile.localProfile
 				},
 				set() {
 					
@@ -55,7 +46,7 @@
 			...mapMutations(['switchDialog']),
 
 			editProfile() {
-				this.updateProfile(this.profile)
+				this.updateProfile(this.localProfile)
 				this.switchDialog(false)
 			}
 		}
