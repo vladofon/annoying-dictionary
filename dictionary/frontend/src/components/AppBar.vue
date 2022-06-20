@@ -43,6 +43,7 @@
     <v-divider></v-divider>
 
     <v-list density="compact" nav>
+      <v-list-item @click="$router.push('/profile')" prepend-icon="mdi-account-box" title="Profile" value="profile"></v-list-item>
       <v-list-item @click="$router.push('/sets')" prepend-icon="mdi-view-dashboard" title="Sets" value="sets"></v-list-item>
       <v-list-item @click="$router.push('/words')" prepend-icon="mdi-forum" title="Words" value="words"></v-list-item>
     </v-list>
