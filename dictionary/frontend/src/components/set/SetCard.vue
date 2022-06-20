@@ -46,7 +46,7 @@
 				text-color="white"
 				append-icon="mdi-star"
 			>
-			12
+			{{set.stars}}
 			</v-chip>
     </v-card-actions>
   </v-card>

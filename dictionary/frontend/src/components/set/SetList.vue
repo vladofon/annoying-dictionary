@@ -2,9 +2,9 @@
 	<v-container>
 	
 		<transition name="switch" mode="out-in">
-			<v-row v-if="sets.length">
+			<v-row v-if="sortedByStarsSets.length">
 				<transition-group name="list" appear>
-					<v-col cols="4" v-for="set in sets" :key="set.id">
+					<v-col cols="4" v-for="set in sortedByStarsSets" :key="set.id">
 						<set-card :set="set"/>
 					</v-col>
 				</transition-group>
@@ -21,14 +21,14 @@
 
 <script>
 	import SetCard from '@/components/set/SetCard.vue'
-	import { mapState } from 'vuex'
+	import { mapGetters } from 'vuex'
 	
 	export default {
 		components: {
 			SetCard
 		},
 		computed: {
-			...mapState('set', ['sets'])
+			...mapGetters('set', ['sortedByStarsSets'])
 		}
 	}
 </script>
