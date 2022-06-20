@@ -16,6 +16,9 @@ export default {
 		updateProfile(state, profile) {
 			state.profile = {...profile}
 			state.localProfile = {...profile}
+		},
+		loadLocalProfile(state) {
+			state.localProfile = {...state.profile}
 		}
 	}
 }

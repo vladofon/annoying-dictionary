@@ -25,8 +25,10 @@ export default {
 			...mapMutations({
 				switchDialog: 'switchDialog'
 			}),
+			...mapMutations('profile', ['loadLocalProfile']),
 			
 			editProfile() {
+				this.loadLocalProfile()
 				this.switchDialog(true)
 			}
 		}
