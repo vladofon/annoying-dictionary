@@ -2,7 +2,7 @@
 	<profile-form/>
 	<profile-dialog/>
 	<profile-header/>
-	<app-header>Popular sets</app-header>
+	<app-header :center="true">Popular sets</app-header>
 	<set-list/>
 </template>
 
