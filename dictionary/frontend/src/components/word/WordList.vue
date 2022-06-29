@@ -21,15 +21,12 @@
 
 <script>
 	import WordCard from '@/components/word/WordCard.vue'
-	import { mapState } from 'vuex'
 	
 	export default {
+		props: ['words'],
 		components: {
 			WordCard
 		},
-		computed: {
-			...mapState('word', ['words'])
-		}
 	}
 </script>
 
