@@ -25,7 +25,7 @@
 <script>
 	import AppDialog from '@/components/AppDialog.vue'
 	import DialogModes from '@/components/word/misc/DialogModes'
-	import { mapMutations, mapState } from 'vuex'
+	import { mapMutations, mapState, mapActions } from 'vuex'
 	
 	export default {
 		components: {
@@ -40,11 +40,13 @@
 			}
 		},
 		methods: {
-			...mapMutations('word', ['addWord', 'updateWord', 'setOperableWord']),
+			...mapMutations('word', ['setOperableWord']),
 			...mapMutations(['switchDialog']),
-			createWord() {
+			...mapActions('word', ['editWord', 'createWord']),
+			
+			addWord() {
 				this.word.id = Math.floor(Math.random() * 100000)
-				this.addWord(this.word)
+				this.createWord(this.word)
 				this.switchDialog(false)
 				
 				const word = {
@@ -55,8 +57,8 @@
 				
 				this.setOperableWord(word)
 			},
-			editWord() {
-				this.updateWord(this.word)
+			updateWord() {
+				this.editWord(this.word)
 				this.switchDialog(false)
 				
 				const word = {
@@ -71,10 +73,10 @@
 				switch(this.dialogMode)
 				{
 					case DialogModes.CREATE:
-						this.createWord()
+						this.addWord()
 						break
 					case DialogModes.EDIT:
-						this.editWord()
+						this.updateWord()
 						break
 				}
 			}
