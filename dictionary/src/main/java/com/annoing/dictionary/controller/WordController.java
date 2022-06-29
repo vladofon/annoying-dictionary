@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,11 +18,18 @@ import com.annoing.dictionary.service.WordService;
 @RestController
 @RequestMapping("words")
 public class WordController {
+
 	private final WordService wordService;
 
 	@Autowired
 	public WordController(WordService wordService) {
 		this.wordService = wordService;
+
+		Word word = new Word();
+		word.setValue("ordinary");
+		word.setContext("ordinary word context");
+
+		wordService.save(word);
 	}
 
 	@GetMapping
@@ -30,16 +38,16 @@ public class WordController {
 	}
 
 	@GetMapping("{id}")
-	public Word getOne(@PathVariable Word word) {
-		return word;
+	public Word getOne(@PathVariable Long id) {
+		return wordService.get(id);
 	}
 
-	@PostMapping("create")
+	@PostMapping
 	public Word create(@RequestBody Word word) {
 		return wordService.save(word);
 	}
 
-	@PostMapping("edit")
+	@PutMapping("{id}")
 	public Word edit(@RequestBody Word word) {
 		return wordService.save(word);
 	}
