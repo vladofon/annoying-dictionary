@@ -19,6 +19,10 @@ public class WordService {
 		return wordRepo.findAll();
 	}
 
+	public Word get(Long id) {
+		return wordRepo.findById(id).get();
+	}
+
 	public Word save(Word word) {
 		return wordRepo.save(word);
 	}
