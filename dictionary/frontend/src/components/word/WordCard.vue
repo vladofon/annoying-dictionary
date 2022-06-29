@@ -10,7 +10,7 @@
 					<v-spacer></v-spacer>
 					
 					<app-menu>
-						<app-menu-item @action="removeWord(word.id)" :color="'red'" :text="'Delete'" />
+						<app-menu-item @action="deleteWord(word.id)" :color="'red'" :text="'Delete'" />
 						<app-menu-item @action="editWord" :color="'orange'" :text="'Edit'" />
 					</app-menu>
 					
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-	import { mapMutations } from 'vuex'
+	import { mapMutations, mapActions } from 'vuex'
 	import DialogModes from '@/components/word/misc/DialogModes'
 	import AppMenu from '@/components/AppMenu.vue'
 	import AppMenuItem from '@/components/AppMenuItem.vue'
@@ -42,7 +42,8 @@
 		},
 		props: ['word'],
 		methods: {
-			...mapMutations('word', ['removeWord', 'updateWord', 'setDialogMode', 'setOperableWord']),
+			...mapMutations('word', ['setDialogMode', 'setOperableWord']),
+			...mapActions('word', ['deleteWord']),
 			...mapMutations(['switchDialog']),
 			
 			editWord() {
