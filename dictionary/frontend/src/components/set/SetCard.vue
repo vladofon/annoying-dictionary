@@ -24,7 +24,7 @@
       <v-spacer></v-spacer>
       
 			<app-menu>
-				<app-menu-item @action="removeSet(set.id)" :color="'red'" :text="'Delete'"/>
+				<app-menu-item @action="deleteSet(set.id)" :color="'red'" :text="'Delete'"/>
 				<app-menu-item @action="editSet" :color="'orange'" :text="'Edit'"/>
 			</app-menu>
       
@@ -40,7 +40,7 @@
         Show
       </v-btn>
       <v-spacer></v-spacer>
-			<v-chip
+			<v-chip v-if="set.stars"
 				class="ma-2"
 				color="orange"
 				text-color="white"
@@ -48,12 +48,20 @@
 			>
 			{{set.stars}}
 			</v-chip>
+			<v-chip v-else
+				class="ma-2"
+				color="gray"
+				text-color="white"
+				append-icon="mdi-star"
+			>
+			-
+			</v-chip>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
-	import { mapState, mapMutations } from 'vuex'
+	import { mapState, mapMutations, mapActions } from 'vuex'
 	import DialogModes from '@/components/set/misc/DialogModes'
 	import AppMenu from '@/components/AppMenu.vue'
 	import AppMenuItem from '@/components/AppMenuItem.vue'
@@ -68,8 +76,9 @@
 			...mapState('set', ['sets'])
 		},
 		methods: {
-			...mapMutations('set', ['removeSet', 'setOperableSet', 'setDialogMode']),
+			...mapMutations('set', ['setOperableSet', 'setDialogMode']),
 			...mapMutations(['switchDialog']),
+			...mapActions('set', ['deleteSet']),
 			
 			editSet() {
 				this.setDialogMode(DialogModes.EDIT)
