@@ -8,7 +8,7 @@
 	import SetList from '@/components/set/SetList.vue'
 	import SetForm from '@/components/set/SetForm.vue'
 	import SetDialog from '@/components/set/SetDialog.vue' 
-	import { mapState } from 'vuex'
+	import { mapGetters, mapActions } from 'vuex'
 	
 	export default {
 		components: {
@@ -16,8 +16,14 @@
 			SetForm,
 			SetDialog
 		},
+		computed: {
+			...mapGetters('set', ['sets']),
+		},
 		methods: {
-			...mapState('set', ['sets'])
+			...mapActions('set', ['fetchSets']),
+		},
+		mounted() {
+			this.fetchSets()
 		}
 	}
 </script>

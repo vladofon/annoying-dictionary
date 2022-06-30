@@ -1,31 +1,33 @@
 <template>
 	<word-form/>
-	<set-header :set="set"/>
-	<word-list/>
+	<set-header :set="sets[0]"/>
+	<!-- <word-list/> -->
 	<word-dialog/>
 </template>
 
 <script>
 	import SetHeader from '@/components/set/SetHeader.vue'
-	import WordList from '@/components/word/WordList.vue'
+	// import WordList from '@/components/word/WordList.vue'
 	import WordForm from '@/components/word/WordForm.vue'
 	import WordDialog from '@/components/word/WordDialog.vue'
+	
+	import { mapState, mapActions } from 'vuex'
 	
 	export default {
 		components: {
 			SetHeader,
-			WordList,
+			// WordList,
 			WordForm,
 			WordDialog
 		},
-		data() {
-			return {
-				set: {
-					id: 103984,
-					title: 'Headline 1',
-					description: 'Greyhound divisely hello coldly fonwderfully'
-				}
-			}
+		computed: {
+			...mapState('set', ['sets'])
+		},
+		methods: {
+			...mapActions('set', ['fetchSet'])
+		},
+		mounted() {
+			this.fetchSet(this.$route.params.id)
 		}
 	}
 </script>

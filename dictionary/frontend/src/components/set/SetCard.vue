@@ -32,6 +32,7 @@
 
     <v-card-actions>
       <v-btn
+				@click="$router.push(`/sets/${set.id}`)"
         outlined
         rounded
         text

@@ -4,23 +4,7 @@ import setApi from '@/api/set'
 export default {
 	namespaced: true,
 	state: {
-		sets: [
-			{id: 1, title: 'Headline 1', description: 'Greyhound divisely hello coldly fonwderfully', stars: 5},
-			{id: 2, title: 'Headline 2', description: 'Greyhound divisely hello coldly fonwderfully', stars: 0},
-			{id: 3, title: 'Headline 3', description: 'Greyhound divisely hello coldly fonwderfully', stars: 12},
-			{id: 4, title: 'Headline 4', description: 'Greyhound divisely hello coldly fonwderfully', stars: 62},
-			{id: 5, title: 'Headline 5', description: 'Greyhound divisely hello coldly fonwderfully', stars: 165},
-			{id: 6, title: 'Headline 6', description: 'Greyhound divisely hello coldly fonwderfully', stars: 18},
-			{id: 7, title: 'Headline 7', description: 'Greyhound divisely hello coldly fonwderfully', stars: 12},
-			{id: 8, title: 'Headline 8', description: 'Greyhound divisely hello coldly fonwderfully', stars: 1},
-			{id: 9, title: 'Headline 9', description: 'Greyhound divisely hello coldly fonwderfully', stars: 11},
-			{id: 10, title: 'Headline 10', description: 'Greyhound divisely hello coldly fonwderfully', stars: 19},
-			{id: 11, title: 'Headline 11', description: 'Greyhound divisely hello coldly fonwderfully', stars: 2},
-			{id: 12, title: 'Headline 12', description: 'Greyhound divisely hello coldly fonwderfully', stars: 12},
-			{id: 13, title: 'Headline 13', description: 'Greyhound divisely hello coldly fonwderfully', stars: 42},
-			{id: 14, title: 'Headline 14', description: 'Greyhound divisely hello coldly fonwderfully', stars: 3},
-			{id: 15, title: 'Headline 15', description: 'Greyhound divisely hello coldly fonwderfully', stars: 56},
-		],
+		sets: [],
 		operableSet: {
 			id: null,
 			title: '',
@@ -29,6 +13,9 @@ export default {
 		dialogMode: DialogModes.CREATE
 	},
 	getters: {
+		sets(state) {
+			return [...state.sets].sort((a,b) => a.id - b.id)
+		},
 		sortedByStarsSets(state) {
 			return [...state.sets].sort((a,b) => b.stars - a.stars)
 		}
@@ -60,6 +47,15 @@ export default {
 			try {
 				const response = await setApi.list()
 				commit('setSets', response.data)
+			} catch (e) {
+				console.log(e)
+			}
+		},
+		async fetchSet({commit}, id) {
+			try {
+				const response = await setApi.get(id)
+				commit('setSets', [response.data])
+				
 			} catch (e) {
 				console.log(e)
 			}
