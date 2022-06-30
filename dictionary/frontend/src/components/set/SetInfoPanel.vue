@@ -1,5 +1,5 @@
 <template>
-	<v-col v-if="set" cols="12" class="mt-10">
+	<v-col cols="12" class="mt-10">
 		<v-card color="#952175" theme="dark">
 			<div class="d-flex flex-no-wrap justify-space-between">
 				<div>
