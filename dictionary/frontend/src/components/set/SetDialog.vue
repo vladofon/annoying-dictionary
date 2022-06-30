@@ -25,7 +25,7 @@
 <script>
 	import AppDialog from '@/components/AppDialog.vue'
 	import DialogModes from '@/components/set/misc/DialogModes'
-	import { mapMutations, mapState } from 'vuex'
+	import { mapMutations, mapState, mapActions } from 'vuex'
 	
 	export default {
 		components: {
@@ -40,18 +40,19 @@
 			...mapState('set', ['dialogMode'])
 		},
 		methods: {
-			...mapMutations('set', ['addSet', 'updateSet', 'setOperableSet']),
+			...mapMutations('set', ['setOperableSet']),
 			...mapMutations(['switchDialog']),
+			...mapActions('set', ['createSet', 'editSet']),
 			
-			createSet() {
+			addSet() {
 				this.set.id = Math.floor(Math.random() * 100000)
-				this.addSet(this.set)
+				this.createSet(this.set)
 				this.switchDialog(false)
 				
 				this.setOperableSet({id:null, title:'', description: ''})
 			},
-			editSet() {
-				this.updateSet(this.set)
+			updateSet() {
+				this.editSet(this.set)
 				this.switchDialog(false)
 				
 				this.setOperableSet({id:null, title:'', description: ''})
@@ -59,10 +60,10 @@
 			setAction() {
 				switch(this.dialogMode) {
 				case DialogModes.CREATE:
-					this.createSet()
+					this.addSet()
 					break
 				case DialogModes.EDIT:
-					this.editSet()
+					this.updateSet()
 					break
 				}
 			}
