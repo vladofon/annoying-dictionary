@@ -1,4 +1,5 @@
 import DialogModes from '@/components/set/misc/DialogModes'
+import setApi from '@/api/set'
 
 export default {
 	namespaced: true,
@@ -33,6 +34,9 @@ export default {
 		}
 	},
 	mutations: {
+		setSets(state, sets) {
+			state.sets = sets
+		},
 		removeSet(state, id) {
 			state.sets = state.sets.filter(item => item.id !== id)
 		},
@@ -49,6 +53,40 @@ export default {
 		},
 		setDialogMode(state, mode) {
 			state.dialogMode = mode
+		}
+	},
+	actions: {
+		async fetchSets({commit}) {
+			try {
+				const response = await setApi.list()
+				commit('setSets', response.data)
+			} catch (e) {
+				console.log(e)
+			}
+		},
+		async createSet({commit}, set) {
+			try {
+				const response = await setApi.create(set)
+				commit('addSet', response.data)
+			} catch (e) {
+				console.log(e)
+			}
+		},
+		async editSet({commit}, set) {
+			try {
+				const response = await setApi.edit(set)
+				commit('updateSet', response.data)
+			} catch (e) {
+				console.log(e)
+			}
+		},
+		async deleteSet({commit}, id) {
+			try {
+				await setApi.delete(id)
+				commit('removeSet', id)
+			} catch (e) {
+				console.log(e)
+			}
 		}
 	}
 }
