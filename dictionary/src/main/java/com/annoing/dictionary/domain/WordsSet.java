@@ -17,12 +17,12 @@ public class WordsSet {
 	private Long id;
 
 	@Column(length = 100)
-	private String name;
+	private String title;
 
 	@Column(length = 1000)
 	private String description;
 
-	@OneToMany(mappedBy = "set")
+	@OneToMany(mappedBy = "wordsSet")
 	private Set<Word> words;
 
 	public Long getId() {
@@ -33,12 +33,12 @@ public class WordsSet {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getDescription() {
