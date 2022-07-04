@@ -1,15 +1,14 @@
+import profileApi from '@/api/profile'
+
 export default {
 	namespaced: true,
 	state: {
-		profile: {
-			name: 'Marcus Obrien',
-			avatar: 'https://cdn.vuetifyjs.com/images/profiles/marcus.jpg',
-			status: 'Free'
-		},
-		localProfile: {
-			name: 'Marcus Obrien',
-			avatar: 'https://cdn.vuetifyjs.com/images/profiles/marcus.jpg',
-			status: 'Free'
+		profile: {},
+		localProfile: {}
+	},
+	getters: {
+		isAuthenticated(state) {
+			return (Object.keys(state.profile).length !== 0) ? true : false
 		}
 	},
 	mutations: {
@@ -19,6 +18,16 @@ export default {
 		},
 		loadLocalProfile(state) {
 			state.localProfile = {...state.profile}
+		}
+	},
+	actions: {
+		async fetchUser({commit}) {
+			try {
+				const response = await profileApi.get()
+				commit('updateProfile', response.data)
+			} catch (e) {
+				console.log(e)
+			}
 		}
 	}
 }
