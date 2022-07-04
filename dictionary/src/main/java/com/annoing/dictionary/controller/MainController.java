@@ -1,19 +1,35 @@
 package com.annoing.dictionary.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import java.io.IOException;
+import java.util.Collections;
 
-@RestController
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.annoing.dictionary.domain.User;
+
+@CrossOrigin
+@Controller
+@RequestMapping("/")
 public class MainController {
 
-	@GetMapping
-	public String mainPage() {
-		return "Begin...";
+	@GetMapping("sessions/me")
+	public ResponseEntity<?> user(@AuthenticationPrincipal User principal) {
+		if (principal == null) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.singletonMap("error", "unauthorized"));
+		}
+		return ResponseEntity.ok(principal);
 	}
 
-	@GetMapping("/another")
-	public String anotherPage() {
-		return "Another mapping...";
+	@GetMapping("sessions/Google/callback")
+	public void googleCallback(HttpServletResponse response) throws IOException {
+		response.sendRedirect("http://localhost:8081/profile");
 	}
-
 }
