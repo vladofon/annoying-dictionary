@@ -1,6 +1,8 @@
 package com.annoing.dictionary.config;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.PrincipalExtractor;
@@ -9,6 +11,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.annoing.dictionary.domain.User;
 import com.annoing.dictionary.repo.UserDetailsRepo;
@@ -20,7 +25,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().mvcMatchers("/").permitAll().anyRequest().authenticated().and().csrf().disable();
+		http.antMatcher("/**").authorizeRequests().antMatchers("/", "/login**", "/js/**", "/error**", "/sessions/me")
+				.permitAll().anyRequest().authenticated().and().logout().logoutSuccessUrl("http://localhost:8081/").permitAll()
+				.and().csrf().disable();
 	}
 
 	@Bean
@@ -45,5 +52,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 			return userDetailsRepo.save(user);
 		};
+	}
+
+	// To enable CORS
+	@Bean
+	public CorsConfigurationSource corsConfigurationSource() {
+		final CorsConfiguration configuration = new CorsConfiguration();
+
+		List<String> allowedOriginsUrl = new ArrayList<>();
+		allowedOriginsUrl.add("http://localhost:8081/");
+		allowedOriginsUrl.add("http://192.192.168.2.104:8081/");
+		configuration.setAllowedOrigins(allowedOriginsUrl);
+		configuration.setAllowedMethods((List.of("GET", "POST", "PUT", "DELETE")));
+		configuration.setAllowCredentials(true);
+		configuration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
+		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", configuration);
+
+		return source;
 	}
 }
