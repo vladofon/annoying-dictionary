@@ -1,5 +1,7 @@
 package com.annoing.dictionary.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Word {
+public class Word implements Serializable {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -20,8 +23,8 @@ public class Word {
 	private String context;
 
 	@ManyToOne
-	@JoinColumn(name = "set_id", nullable = false)
-	private WordsSet set;
+	@JoinColumn(name = "words_set_id", nullable = false)
+	private WordsSet wordsSet;
 
 	public Word() {
 	}
@@ -51,16 +54,16 @@ public class Word {
 	}
 
 	public WordsSet getSet() {
-		return set;
+		return wordsSet;
 	}
 
-	public void setSet(WordsSet set) {
-		this.set = set;
+	public void setSet(WordsSet wordsSet) {
+		this.wordsSet = wordsSet;
 	}
 
 	@Override
 	public String toString() {
-		return "Word [id=" + id + ", value=" + value + "]";
+		return "Word [id=" + id + ", value=" + value + ", context=" + context + "]";
 	}
 
 	@Override

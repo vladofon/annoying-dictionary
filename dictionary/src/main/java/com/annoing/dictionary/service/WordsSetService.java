@@ -21,6 +21,10 @@ public class WordsSetService {
 		return wordsSetRepo.findAll();
 	}
 
+	public WordsSet getOne(Long id) {
+		return wordsSetRepo.findById(id).get();
+	}
+
 	public WordsSet save(WordsSet wordsSet) {
 		return wordsSetRepo.save(wordsSet);
 	}

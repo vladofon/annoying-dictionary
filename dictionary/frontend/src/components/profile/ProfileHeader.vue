@@ -6,7 +6,7 @@
 					<v-col cols="5">
 						
 							<v-avatar color="grey" size="150" rounded="10" >
-								<v-img :src="profile.avatar" height="100%" cover></v-img>
+								<v-img :src="profile.userpic" height="100%" cover></v-img>
 							</v-avatar>
 							<v-list-item class="text-white" :title="profile.name" subtitle="Free account">
 							
@@ -76,11 +76,17 @@
 </template>
 
 <script>
-	import { mapState } from 'vuex'
+	import { mapState, mapActions } from 'vuex'
 	
 	export default {
 		computed: {
 			...mapState('profile', ['profile'])
+		},
+		methods: {
+			...mapActions('profile', ['fetchUser'])
+		},
+		created() {
+			this.fetchUser()
 		}
 	}
 </script>

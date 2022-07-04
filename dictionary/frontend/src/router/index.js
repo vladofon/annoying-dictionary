@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import MainPage from '@/router/MainPage.vue'
 import WordsPage from '@/router/WordsPage.vue'
 import SetsPage from '@/router/SetsPage.vue'
 import QuizPage from '@/router/QuizPage.vue'
@@ -6,6 +7,7 @@ import SetPage from '@/router/SetPage.vue'
 import ProfilePage from '@/router/ProfilePage.vue'
 
 const routes = [
+  {path: '/', component: MainPage},
   {path: '/words', component: WordsPage},
   {path: '/sets', component: SetsPage},
   {path: '/sets/:id', component: SetPage},
