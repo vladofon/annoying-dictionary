@@ -27,7 +27,12 @@
       </v-btn>
 
       <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
+				<a v-if="!isAuthenticated" @click.prevent="login">
+					<v-icon>mdi-login</v-icon>
+				</a>
+				<a v-else @click.prevent="logout">
+					<v-icon>mdi-logout</v-icon>
+				</a>
       </v-btn>
     </v-app-bar>
     
@@ -53,12 +58,25 @@
 </template>
 
 <script>
+	import { mapGetters } from 'vuex'
+	
 	export default {
 		data () {
 			return {
 				drawer: null,
 			}
 		},
+		computed: {
+			...mapGetters('profile', ['isAuthenticated'])
+		},
+		methods: {
+			login() {
+				window.location.href = "http://localhost:8080/sessions/Google/callback";
+			},
+			logout() {
+				window.location.href = "http://localhost:8080/logout";
+			}
+		}
 	}
 </script>
 
