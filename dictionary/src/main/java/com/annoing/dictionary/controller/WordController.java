@@ -3,6 +3,7 @@ package com.annoing.dictionary.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.annoing.dictionary.domain.Word;
 import com.annoing.dictionary.service.WordService;
 
+@CrossOrigin
 @RestController
 @RequestMapping("words")
 public class WordController {
@@ -24,12 +26,6 @@ public class WordController {
 	@Autowired
 	public WordController(WordService wordService) {
 		this.wordService = wordService;
-
-		Word word = new Word();
-		word.setValue("ordinary");
-		word.setContext("ordinary word context");
-
-		wordService.save(word);
 	}
 
 	@GetMapping
