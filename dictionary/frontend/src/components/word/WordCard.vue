@@ -30,7 +30,7 @@
 </template>
 
 <script>
-	import { mapMutations, mapActions } from 'vuex'
+	import { mapMutations, mapActions, mapGetters } from 'vuex'
 	import DialogModes from '@/components/word/misc/DialogModes'
 	import AppMenu from '@/components/AppMenu.vue'
 	import AppMenuItem from '@/components/AppMenuItem.vue'
@@ -45,10 +45,11 @@
 			...mapMutations('word', ['setDialogMode', 'setOperableWord']),
 			...mapActions('word', ['deleteWord']),
 			...mapMutations(['switchDialog']),
+			...mapGetters('set', ['operableSet']),
 			
 			editWord() {
 				this.setDialogMode(DialogModes.EDIT)
-				this.setOperableWord({id:this.word.id, value:this.word.value, context:this.word.context})
+				this.setOperableWord({id:this.word.id, setId: this.operableSet.id, value:this.word.value, context:this.word.context})
 				this.switchDialog(true)
 			}
 		}

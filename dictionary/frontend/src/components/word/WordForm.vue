@@ -18,10 +18,13 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapMutations, mapGetters } from 'vuex'
 import DialogModes from '@/components/word/misc/DialogModes'
 
 export default {
+	computed: {
+		...mapGetters('set', ['operableSet'])
+	},
 	methods: {
 		...mapMutations({
 			switchDialog: 'switchDialog'
@@ -30,7 +33,7 @@ export default {
 		
 		createWord() {
 			this.setDialogMode(DialogModes.CREATE)
-			this.setOperableWord({id:null, value:'', context:''})
+			this.setOperableWord({id:null, setId: this.operableSet.id, value:'', context:''})
 			this.switchDialog(true)
 		}
 	}

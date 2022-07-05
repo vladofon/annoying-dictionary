@@ -11,7 +11,7 @@
 	import WordForm from '@/components/word/WordForm.vue'
 	import WordDialog from '@/components/word/WordDialog.vue'
 	
-	import { mapState, mapActions } from 'vuex'
+	import { mapMutations, mapGetters, mapActions } from 'vuex'
 	
 	export default {
 		components: {
@@ -21,13 +21,20 @@
 			WordDialog
 		},
 		computed: {
-			...mapState('set', ['sets'])
+			...mapGetters('set', ['sets']),
 		},
 		methods: {
-			...mapActions('set', ['fetchSet'])
+			...mapActions('set', ['fetchSet']),
+			...mapMutations('set', ['setOperableSet']),
 		},
 		mounted() {
 			this.fetchSet(this.$route.params.id)
+			
+			this.setOperableSet({
+				id: this.$route.params.id, 
+				title: '', 
+				description: ''
+			})
 		}
 	}
 </script>

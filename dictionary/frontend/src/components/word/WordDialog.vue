@@ -45,12 +45,12 @@
 			...mapActions('word', ['editWord', 'createWord']),
 			
 			addWord() {
-				this.word.id = Math.floor(Math.random() * 100000)
 				this.createWord(this.word)
 				this.switchDialog(false)
 				
 				const word = {
-					id: 0,
+					id: -1,
+					setId: -1,
 					value: '',
 					context: ''
 				}
@@ -62,7 +62,8 @@
 				this.switchDialog(false)
 				
 				const word = {
-					id: 0,
+					id: -1,
+					setId: -1,
 					value: '',
 					context: ''
 				}

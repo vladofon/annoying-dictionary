@@ -6,15 +6,18 @@ export default {
 	state: {
 		sets: [],
 		operableSet: {
-			id: null,
+			id: -1,
 			title: '',
 			description: ''
 		},
-		dialogMode: DialogModes.CREATE
+		dialogMode: DialogModes.CREATE,
 	},
 	getters: {
 		sets(state) {
 			return [...state.sets].sort((a,b) => a.id - b.id)
+		},
+		operableSet(state) {
+			return state.operableSet
 		},
 		sortedByStarsSets(state) {
 			return [...state.sets].sort((a,b) => b.stars - a.stars)

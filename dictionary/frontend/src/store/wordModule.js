@@ -6,7 +6,8 @@ export default {
 	state: {
 		words: [],
 		operableWord: {
-			id: 0,
+			id: -1,
+			setId: -1,
 			value: '',
 			context: ''
 		},
