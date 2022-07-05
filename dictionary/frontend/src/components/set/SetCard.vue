@@ -57,6 +57,16 @@
 			>
 			-
 			</v-chip>
+			
+			<v-chip v-if="set.defaultSet"
+				class="ma-2"
+				color="gray"
+				text-color="white"
+				append-icon="mdi-lock"
+			>
+			default
+			</v-chip>
+			
     </v-card-actions>
   </v-card>
 </template>
