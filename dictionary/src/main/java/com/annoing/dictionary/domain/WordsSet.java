@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.annoing.dictionary.domain.view.WordsSetView;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
@@ -35,11 +37,13 @@ public class WordsSet {
 
 	@OneToMany(mappedBy = "wordsSet")
 	@JsonView(WordsSetView.FullView.class)
+	@JsonManagedReference
 	private Set<Word> words;
 
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)
 	@JsonView(WordsSetView.FullView.class)
+	@JsonBackReference
 	private User author;
 
 	public Long getId() {

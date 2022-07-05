@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Word implements Serializable {
 
@@ -24,6 +26,7 @@ public class Word implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "words_set_id", nullable = false)
+	@JsonBackReference
 	private WordsSet wordsSet;
 
 	public Word() {

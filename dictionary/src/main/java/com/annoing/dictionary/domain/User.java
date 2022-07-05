@@ -9,6 +9,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.annoing.dictionary.domain.view.UserView;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
@@ -39,6 +40,7 @@ public class User {
 
 	@OneToMany(mappedBy = "author")
 	@JsonView(UserView.FullView.class)
+	@JsonManagedReference
 	private List<WordsSet> sets;
 
 	public User() {
