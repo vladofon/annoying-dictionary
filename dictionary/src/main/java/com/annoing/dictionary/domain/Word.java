@@ -10,23 +10,29 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.annoing.dictionary.domain.view.WordView;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 public class Word implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@JsonView(WordView.QuickView.class)
 	private Long id;
 
+	@JsonView(WordView.QuickView.class)
 	private String value;
 
 	@Column(length = 1000)
+	@JsonView(WordView.QuickView.class)
 	private String context;
 
 	@ManyToOne
 	@JoinColumn(name = "words_set_id", nullable = false)
 	@JsonBackReference
+	@JsonView(WordView.FullView.class)
 	private WordsSet wordsSet;
 
 	public Word() {
