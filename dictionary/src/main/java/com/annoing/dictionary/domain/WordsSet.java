@@ -1,5 +1,6 @@
 package com.annoing.dictionary.domain;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -38,7 +39,7 @@ public class WordsSet {
 	@OneToMany(mappedBy = "wordsSet")
 	@JsonView(WordsSetView.FullView.class)
 	@JsonManagedReference
-	private Set<Word> words;
+	private Set<Word> words = new HashSet<>();
 
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)

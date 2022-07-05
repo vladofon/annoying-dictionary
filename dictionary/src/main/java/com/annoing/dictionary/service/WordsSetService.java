@@ -51,6 +51,10 @@ public class WordsSetService {
 		return defaultSet;
 	}
 
+	public WordsSet getDefaultSet() {
+		return wordsSetRepo.findByDefaultSetTrue().get(0);
+	}
+
 	public WordsSet markAsDefault(WordsSet set) {
 		dropDefaultSet();
 

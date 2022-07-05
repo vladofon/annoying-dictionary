@@ -3,6 +3,7 @@ package com.annoing.dictionary.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,13 +48,21 @@ public class WordsSetController {
 	}
 
 	@PostMapping
-	public WordsSet create(@RequestBody WordsSet wordsSet) {
+	public WordsSet create(@RequestBody WordsSet wordsSet, @AuthenticationPrincipal User author) {
+		wordsSet.setAuthor(author);
+		wordsSet.setDefaultSet(false);
+
 		return wordsSetService.save(wordsSet);
 	}
 
 	@PutMapping("{id}")
-	public WordsSet update(@RequestBody WordsSet wordsSet) {
-		return wordsSetService.save(wordsSet);
+	public WordsSet update(@RequestBody WordsSet afterUpdate, @PathVariable Long id) {
+		WordsSet beforeUpdate = wordsSetService.getOne(id);
+
+		beforeUpdate.setDescription(afterUpdate.getDescription());
+		beforeUpdate.setTitle(afterUpdate.getTitle());
+
+		return wordsSetService.save(beforeUpdate);
 	}
 
 	@DeleteMapping("{id}")

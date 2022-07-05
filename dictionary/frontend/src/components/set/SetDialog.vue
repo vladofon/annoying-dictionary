@@ -45,7 +45,6 @@
 			...mapActions('set', ['createSet', 'editSet']),
 			
 			addSet() {
-				this.set.id = Math.floor(Math.random() * 100000)
 				this.createSet(this.set)
 				this.switchDialog(false)
 				
