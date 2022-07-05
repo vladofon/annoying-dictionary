@@ -5,16 +5,20 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.annoing.dictionary.domain.User;
 import com.annoing.dictionary.domain.WordsSet;
+import com.annoing.dictionary.repo.UserDetailsRepo;
 import com.annoing.dictionary.repo.WordsSetRepo;
 
 @Service
 public class WordsSetService {
 	private final WordsSetRepo wordsSetRepo;
+	private final UserDetailsRepo userRepo;
 
 	@Autowired
-	public WordsSetService(WordsSetRepo wordsSetRepo) {
+	public WordsSetService(WordsSetRepo wordsSetRepo, UserDetailsRepo userRepo) {
 		this.wordsSetRepo = wordsSetRepo;
+		this.userRepo = userRepo;
 	}
 
 	public List<WordsSet> getAll() {
@@ -30,6 +34,41 @@ public class WordsSetService {
 	}
 
 	public void remove(Long id) {
-		wordsSetRepo.deleteById(id);
+		if (!getOne(id).isDefaultSet())
+			wordsSetRepo.deleteById(id);
 	}
+
+	public WordsSet createDefaultSet(User user) {
+		WordsSet defaultSet = new WordsSet();
+		defaultSet.setTitle("Default set");
+		defaultSet.setDescription("You can save your words here");
+		defaultSet.setAuthor(user);
+
+		user.getSets().add(markAsDefault(defaultSet));
+
+		userRepo.save(user);
+
+		return defaultSet;
+	}
+
+	public WordsSet markAsDefault(WordsSet set) {
+		dropDefaultSet();
+
+		set.setDefaultSet(true);
+
+		return wordsSetRepo.save(set);
+	}
+
+	public List<WordsSet> userSets(User author) {
+		return wordsSetRepo.findByAuthor(author);
+	}
+
+	private void dropDefaultSet() {
+		List<WordsSet> defaultSet = wordsSetRepo.findByDefaultSetTrue();
+
+		defaultSet.forEach(set -> set.setDefaultSet(false));
+
+		wordsSetRepo.saveAll(defaultSet);
+	}
+
 }
