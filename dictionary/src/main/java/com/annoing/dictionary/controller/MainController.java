@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.annoing.dictionary.domain.User;
+import com.annoing.dictionary.domain.view.UserView;
+import com.fasterxml.jackson.annotation.JsonView;
 
 @CrossOrigin
 @Controller
@@ -21,6 +23,7 @@ import com.annoing.dictionary.domain.User;
 public class MainController {
 
 	@GetMapping("sessions/me")
+	@JsonView(UserView.ProfileView.class)
 	public ResponseEntity<?> user(@AuthenticationPrincipal User principal) {
 		if (principal == null) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.singletonMap("error", "unauthorized"));

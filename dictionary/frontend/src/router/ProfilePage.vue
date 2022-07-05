@@ -2,8 +2,10 @@
 	<profile-form/>
 	<profile-dialog/>
 	<profile-header/>
-	<app-header :center="true">Popular sets</app-header>
-	<set-list :sets="sortedByStarsSets"/>
+	<div v-if="sortedByStarsSets">
+		<app-header :center="true">Popular sets</app-header>
+		<set-list :sets="sortedByStarsSets"/>
+	</div>
 </template>
 
 <script>
@@ -12,7 +14,7 @@
 	import ProfileForm from "@/components/profile/ProfileForm.vue"
 	import SetList from "@/components/set/SetList.vue"
 	import AppHeader from "@/components/AppHeader.vue"
-	import { mapGetters } from 'vuex'
+	import { mapGetters, mapActions } from 'vuex'
 	
 	export default {
 		components: {
@@ -23,7 +25,16 @@
 			AppHeader
 		},
 		computed: {
-			...mapGetters('set', ['sortedByStarsSets'])
+			...mapGetters('set', ['sortedByStarsSets']),
+			...mapGetters('profile', ['profile']),
+		},
+		methods: {
+			...mapActions('set', ['fetchUserSets']),
+		},
+		watch: {
+			profile(newProfile) {
+				this.fetchUserSets(newProfile.id)
+			}
 		}
 	}
 </script>

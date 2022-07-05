@@ -1,6 +1,7 @@
 package com.annoing.dictionary.domain;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -41,7 +42,7 @@ public class User {
 	@OneToMany(mappedBy = "author")
 	@JsonView(UserView.FullView.class)
 	@JsonManagedReference
-	private List<WordsSet> sets;
+	private List<WordsSet> sets = new ArrayList<>();
 
 	public User() {
 	}

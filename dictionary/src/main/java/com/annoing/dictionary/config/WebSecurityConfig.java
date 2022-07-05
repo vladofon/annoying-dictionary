@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.PrincipalExtractor;
 import org.springframework.context.annotation.Bean;
@@ -17,11 +18,19 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.annoing.dictionary.domain.User;
 import com.annoing.dictionary.repo.UserDetailsRepo;
+import com.annoing.dictionary.service.WordsSetService;
 
 @Configuration
 @EnableWebSecurity
 @EnableOAuth2Sso
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+	private final WordsSetService wordsSetService;
+
+	@Autowired
+	WebSecurityConfig(WordsSetService wordsSetService) {
+		this.wordsSetService = wordsSetService;
+	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -63,7 +72,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		allowedOriginsUrl.add("http://localhost:8081/");
 		allowedOriginsUrl.add("http://192.192.168.2.104:8081/");
 		configuration.setAllowedOrigins(allowedOriginsUrl);
-		configuration.setAllowedMethods((List.of("GET", "POST", "PUT", "DELETE")));
+		configuration.setAllowedMethods((List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")));
 		configuration.setAllowCredentials(true);
 		configuration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
 		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

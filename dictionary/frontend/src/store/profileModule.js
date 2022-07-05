@@ -9,6 +9,9 @@ export default {
 	getters: {
 		isAuthenticated(state) {
 			return (Object.keys(state.profile).length !== 0) ? true : false
+		},
+		profile(state) {
+			return {...state.profile}
 		}
 	},
 	mutations: {
