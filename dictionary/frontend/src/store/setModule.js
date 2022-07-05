@@ -51,6 +51,14 @@ export default {
 				console.log(e)
 			}
 		},
+		async fetchUserSets({commit}, userId) {
+			try {
+				const response = await setApi.listByUser(userId)
+				commit('setSets', response.data)
+			} catch (e) {
+				console.log(e)
+			}
+		},
 		async fetchSet({commit}, id) {
 			try {
 				const response = await setApi.get(id)
