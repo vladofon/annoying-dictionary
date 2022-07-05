@@ -1,23 +1,45 @@
 package com.annoing.dictionary.domain;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.annoing.dictionary.domain.view.UserView;
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name = "usr")
 public class User {
 
 	@Id
+	@JsonView(UserView.QuickView.class)
 	private String id;
+
+	@JsonView(UserView.QuickView.class)
 	private String name;
+
+	@JsonView(UserView.QuickView.class)
 	private String userpic;
+
+	@JsonView(UserView.ProfileView.class)
 	private String gender;
+
+	@JsonView(UserView.ProfileView.class)
 	private String locale;
+
+	@JsonView(UserView.ProfileView.class)
 	private String email;
+
+	@JsonView(UserView.ProfileView.class)
 	private LocalDateTime lastVisit;
+
+	@OneToMany(mappedBy = "author")
+	@JsonView(UserView.FullView.class)
+	private List<WordsSet> sets;
 
 	public User() {
 	}
@@ -76,6 +98,14 @@ public class User {
 
 	public void setLastVisit(LocalDateTime lastVisit) {
 		this.lastVisit = lastVisit;
+	}
+
+	public List<WordsSet> getSets() {
+		return sets;
+	}
+
+	public void setSets(List<WordsSet> sets) {
+		this.sets = sets;
 	}
 
 	@Override

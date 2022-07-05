@@ -7,23 +7,40 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.annoing.dictionary.domain.view.WordsSetView;
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 public class WordsSet {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@JsonView(WordsSetView.QuickView.class)
 	private Long id;
 
 	@Column(length = 100)
+	@JsonView(WordsSetView.QuickView.class)
 	private String title;
 
 	@Column(length = 1000)
+	@JsonView(WordsSetView.QuickView.class)
 	private String description;
 
+	@JsonView(WordsSetView.QuickView.class)
+	private boolean defaultSet;
+
 	@OneToMany(mappedBy = "wordsSet")
+	@JsonView(WordsSetView.FullView.class)
 	private Set<Word> words;
+
+	@ManyToOne
+	@JoinColumn(name = "user_id", nullable = false)
+	@JsonView(WordsSetView.FullView.class)
+	private User author;
 
 	public Long getId() {
 		return id;
@@ -49,12 +66,28 @@ public class WordsSet {
 		this.description = description;
 	}
 
+	public boolean isDefaultSet() {
+		return defaultSet;
+	}
+
+	public void setDefaultSet(boolean defaultSet) {
+		this.defaultSet = defaultSet;
+	}
+
 	public Set<Word> getWords() {
 		return words;
 	}
 
 	public void setWords(Set<Word> words) {
 		this.words = words;
+	}
+
+	public User getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(User author) {
+		this.author = author;
 	}
 
 	@Override
