@@ -24,8 +24,9 @@
       <v-spacer></v-spacer>
       
 			<app-menu>
-				<app-menu-item @action="deleteSet(set.id)" :color="'red'" :text="'Delete'"/>
+				<app-menu-item v-if="!set.defaultSet" @action="deleteSet(set.id)" :color="'red'" :text="'Delete'"/>
 				<app-menu-item @action="editSet" :color="'orange'" :text="'Edit'"/>
+				<app-menu-item v-if="!set.defaultSet" @action="makeDefault" :color="'orange'" :text="'Mark as default'"/>
 			</app-menu>
       
     </v-list-item>
@@ -72,7 +73,7 @@
 </template>
 
 <script>
-	import { mapState, mapMutations, mapActions } from 'vuex'
+	import { mapGetters, mapMutations, mapActions } from 'vuex'
 	import DialogModes from '@/components/set/misc/DialogModes'
 	import AppMenu from '@/components/AppMenu.vue'
 	import AppMenuItem from '@/components/AppMenuItem.vue'
@@ -84,12 +85,12 @@
 		},
 		props: ['set'],
 		computed: {
-			...mapState('set', ['sets'])
+			...mapGetters('set', ['sets', 'defaultSet'])
 		},
 		methods: {
-			...mapMutations('set', ['setOperableSet', 'setDialogMode']),
+			...mapMutations('set', ['setOperableSet', 'setDialogMode', 'updateSet']),
 			...mapMutations(['switchDialog']),
-			...mapActions('set', ['deleteSet']),
+			...mapActions('set', ['deleteSet', 'makeDefaultSet']),
 			
 			editSet() {
 				this.setDialogMode(DialogModes.EDIT)
@@ -101,6 +102,17 @@
 				})
 				
 				this.switchDialog(true)
+			},
+			
+			makeDefault() {
+				this.updateSet({
+					id: this.defaultSet.id, 
+					title: this.defaultSet.title,
+					description: this.defaultSet.description,
+					defaultSet: false
+				})
+				
+				this.makeDefaultSet(this.set.id)
 			}
 		}
 	}

@@ -21,6 +21,10 @@ export default {
 		},
 		sortedByStarsSets(state) {
 			return [...state.sets].sort((a,b) => b.stars - a.stars)
+		},
+		defaultSet(state) {
+			const index = state.sets.findIndex(set => set.defaultSet === true)
+			return state.sets[index]
 		}
 	},
 	mutations: {
@@ -90,6 +94,14 @@ export default {
 			try {
 				await setApi.delete(id)
 				commit('removeSet', id)
+			} catch (e) {
+				console.log(e)
+			}
+		},
+		async makeDefaultSet({commit}, id) {
+			try {
+				const response = await setApi.setDefault(id)
+				commit('updateSet', response.data)
 			} catch (e) {
 				console.log(e)
 			}

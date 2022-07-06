@@ -62,6 +62,7 @@ public class WordsSetController {
 	}
 
 	@PostMapping
+	@JsonView(WordsSetView.QuickView.class)
 	public WordsSet create(@RequestBody WordsSet wordsSet, @AuthenticationPrincipal User author) {
 		wordsSet.setAuthor(author);
 		wordsSet.setDefaultSet(false);
@@ -70,6 +71,7 @@ public class WordsSetController {
 	}
 
 	@PutMapping("{id}")
+	@JsonView(WordsSetView.QuickView.class)
 	public WordsSet update(@RequestBody WordsSet afterUpdate, @PathVariable Long id) {
 		WordsSet beforeUpdate = wordsSetService.getOne(id);
 
@@ -77,6 +79,12 @@ public class WordsSetController {
 		beforeUpdate.setTitle(afterUpdate.getTitle());
 
 		return wordsSetService.save(beforeUpdate);
+	}
+
+	@PutMapping("{id}/default")
+	@JsonView(WordsSetView.QuickView.class)
+	public WordsSet setDefault(@PathVariable Long id) {
+		return wordsSetService.markAsDefault(wordsSetService.getOne(id));
 	}
 
 	@DeleteMapping("{id}")

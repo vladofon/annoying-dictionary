@@ -56,7 +56,7 @@ public class WordsSetService {
 	}
 
 	public WordsSet markAsDefault(WordsSet set) {
-		dropDefaultSet();
+		dropDefaultSet(set.getAuthor());
 
 		set.setDefaultSet(true);
 
@@ -67,8 +67,8 @@ public class WordsSetService {
 		return wordsSetRepo.findByAuthor(author);
 	}
 
-	private void dropDefaultSet() {
-		List<WordsSet> defaultSet = wordsSetRepo.findByDefaultSetTrue();
+	private void dropDefaultSet(User author) {
+		List<WordsSet> defaultSet = wordsSetRepo.findByAuthorAndDefaultSetTrue(author);
 
 		defaultSet.forEach(set -> set.setDefaultSet(false));
 
