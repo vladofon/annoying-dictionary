@@ -1,13 +1,15 @@
 <template>
-	<word-form/>
-	<set-header :set="sets[0]"/>
-	<!-- <word-list/> -->
-	<word-dialog/>
+	<div v-if="operableSet">
+		<word-form/>
+		<set-header :set="operableSet"/>
+		<word-list :words="words"/>
+		<word-dialog/>
+	</div>
 </template>
 
 <script>
 	import SetHeader from '@/components/set/SetHeader.vue'
-	// import WordList from '@/components/word/WordList.vue'
+	import WordList from '@/components/word/WordList.vue'
 	import WordForm from '@/components/word/WordForm.vue'
 	import WordDialog from '@/components/word/WordDialog.vue'
 	
@@ -16,25 +18,27 @@
 	export default {
 		components: {
 			SetHeader,
-			// WordList,
+			WordList,
 			WordForm,
 			WordDialog
 		},
 		computed: {
-			...mapGetters('set', ['sets']),
+			...mapGetters('set', ['operableSet']),
+			...mapGetters('word', ['words']),
 		},
 		methods: {
 			...mapActions('set', ['fetchSet']),
 			...mapMutations('set', ['setOperableSet']),
-		},
-		mounted() {
-			this.fetchSet(this.$route.params.id)
+			...mapMutations('word', ['setWords']),
 			
-			this.setOperableSet({
-				id: this.$route.params.id, 
-				title: '', 
-				description: ''
-			})
+		},
+		created() {
+			this.fetchSet(this.$route.params.id)
+		},
+		watch: {
+			operableSet(loaded) {
+				this.setWords(loaded.words)
+			}
 		}
 	}
 </script>

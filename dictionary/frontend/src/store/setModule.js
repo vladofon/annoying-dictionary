@@ -65,8 +65,7 @@ export default {
 		async fetchSet({commit}, id) {
 			try {
 				const response = await setApi.get(id)
-				commit('setSets', [response.data])
-				
+				commit('setOperableSet', response.data)
 			} catch (e) {
 				console.log(e)
 			}

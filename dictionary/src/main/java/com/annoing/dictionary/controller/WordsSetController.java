@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.annoing.dictionary.domain.User;
 import com.annoing.dictionary.domain.WordsSet;
+import com.annoing.dictionary.domain.dto.WordsSetDto;
 import com.annoing.dictionary.domain.view.WordsSetView;
 import com.annoing.dictionary.service.UserService;
+import com.annoing.dictionary.service.WordService;
 import com.annoing.dictionary.service.WordsSetService;
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -26,13 +28,15 @@ import com.fasterxml.jackson.annotation.JsonView;
 @RequestMapping("sets")
 public class WordsSetController {
 
-	private WordsSetService wordsSetService;
-	private UserService userService;
+	private final WordsSetService wordsSetService;
+	private final WordService wordService;
+	private final UserService userService;
 
 	@Autowired
-	WordsSetController(WordsSetService wordsSetService, UserService userService) {
+	WordsSetController(WordsSetService wordsSetService, UserService userService, WordService wordService) {
 		this.wordsSetService = wordsSetService;
 		this.userService = userService;
+		this.wordService = wordService;
 	}
 
 	@GetMapping
@@ -42,9 +46,19 @@ public class WordsSetController {
 	}
 
 	@GetMapping("{id}")
-	@JsonView(WordsSetView.QuickView.class)
-	public WordsSet getOne(@PathVariable Long id) {
-		return wordsSetService.getOne(id);
+	public WordsSetDto getOne(@PathVariable Long id) {
+
+		WordsSet set = wordsSetService.getOne(id);
+		WordsSetDto dto = new WordsSetDto();
+
+		dto.setAuthorName(set.getAuthor().getName());
+		dto.setDefaultSet(set.isDefaultSet());
+		dto.setDescription(set.getDescription());
+		dto.setId(set.getId());
+		dto.setTitle(set.getTitle());
+		dto.setWords(wordService.getSetWords(set));
+
+		return dto;
 	}
 
 	@PostMapping

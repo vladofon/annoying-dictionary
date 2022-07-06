@@ -1,5 +1,5 @@
 <template>
-	<v-container class="pa-10">
+	<v-container v-if="words" class="pa-10">
 		<transition name="switch" mode="out-in">
 			<v-row v-if="words.length">
 				<v-col>
