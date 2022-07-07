@@ -1,5 +1,6 @@
 package com.annoing.dictionary.domain;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,12 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name = "usr")
-public class User {
+public class User implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@JsonView(UserView.QuickView.class)

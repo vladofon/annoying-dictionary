@@ -36,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.antMatcher("/**").authorizeRequests().antMatchers("/", "/login**", "/js/**", "/error**", "/sessions/me")
 				.permitAll().anyRequest().authenticated().and().logout().logoutSuccessUrl("http://localhost:8081/").permitAll()
-				.and().csrf().disable();
+				.and().logout().deleteCookies("JSESSIONID").and().rememberMe().key("uniqueAndSecret").and().csrf().disable();
 	}
 
 	@Bean
