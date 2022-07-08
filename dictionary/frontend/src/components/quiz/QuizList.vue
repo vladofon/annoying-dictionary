@@ -12,15 +12,9 @@
 	import { mapState, mapMutations } from 'vuex'
 	
 	export default {
+		props: ['items'],
 		data() {
 			return {
-				items: [
-					{header: 'hrader-1', context: 'content-1'},
-					{header: 'hrader-2', context: 'content-2'},
-					{header: 'hrader-3', context: 'content-3'},
-					{header: 'hrader-4', context: 'content-4'},
-					{header: 'hrader-5', context: 'content-5'},
-				],
 				item: {
 					header: '',
 					context: '',

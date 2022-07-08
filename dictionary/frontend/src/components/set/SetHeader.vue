@@ -5,7 +5,7 @@
 					<set-info-panel :set="set">
 						<template v-slot:actions>
 	
-							<v-btn class="ml-2 mr-2" icon="mdi-play" variant="text"></v-btn>
+							<v-btn @click="$router.push(`/quiz/${set.id}`)" class="ml-2 mr-2" icon="mdi-play" variant="text"></v-btn>
              
 							<app-menu>
 								<app-menu-item @action="doSmth" :color="'red'" :text="'Delete'" />

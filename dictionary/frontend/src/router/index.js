@@ -11,7 +11,7 @@ const routes = [
   {path: '/words', component: WordsPage},
   {path: '/sets', component: SetsPage},
   {path: '/sets/:id', component: SetPage},
-  {path: '/quiz', component: QuizPage},
+  {path: '/quiz/:id', component: QuizPage},
   {path: '/profile', component: ProfilePage},
 ]
 
