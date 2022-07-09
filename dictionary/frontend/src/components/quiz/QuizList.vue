@@ -17,7 +17,7 @@
 			return {
 				item: {
 					header: '',
-					context: '',
+					value: '',
 				},
 			}
 		},

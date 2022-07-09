@@ -73,6 +73,7 @@
 				confirmButton: true,
 				rejectButton: true,
 				userInput: '',
+				errorsCount: 0,
 			}
 		},
 		methods: {
@@ -80,11 +81,13 @@
 				incrementCurrentIndex: 'quiz/incrementCurrentIndex'
 			}),
 			validate() {
-				if(this.userInput !== this.quizItem.header) {
+				if(this.userInput !== this.quizItem.value) {
+					console.log(this.userInput + ' !== ' + this.quizItem.title)
 					this.fieldColor = 'red'
 					this.bgColor = 'bg-red-lighten-4'
 					this.confirmButton = false
 					this.rejectButton = false
+					this.errorsCount++
 				} else {
 					this.fieldColor = 'teal'
 					this.bgColor = 'bg-teal-lighten-4'
@@ -111,7 +114,7 @@
 		watch: {
 			currentIndex(value) {
 				if(value === this.totalCount) {
-					this.$router.push('/sets/' + this.$route.params.id)
+					this.$router.push('/sets/' + this.$route.params.id + '?quiz=true&errors=' + this.errorsCount + '&count=' + this.totalCount)
 				}
 			}
 		}

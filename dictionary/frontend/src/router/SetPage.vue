@@ -5,6 +5,7 @@
 		<word-list :words="words"/>
 		<word-dialog/>
 	</div>
+	<quiz-end-dialog v-if="$route.query.quiz && operableSet"/>
 </template>
 
 <script>
@@ -12,6 +13,7 @@
 	import WordList from '@/components/word/WordList.vue'
 	import WordForm from '@/components/word/WordForm.vue'
 	import WordDialog from '@/components/word/WordDialog.vue'
+	import QuizEndDialog from '@/components/quiz/QuizEndDialog.vue'
 	
 	import { mapMutations, mapGetters, mapActions } from 'vuex'
 	
@@ -20,7 +22,8 @@
 			SetHeader,
 			WordList,
 			WordForm,
-			WordDialog
+			WordDialog,
+			QuizEndDialog
 		},
 		computed: {
 			...mapGetters('set', ['operableSet']),
