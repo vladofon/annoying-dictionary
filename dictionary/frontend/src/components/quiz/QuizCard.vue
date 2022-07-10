@@ -78,7 +78,8 @@
 		},
 		methods: {
 			...mapMutations({
-				incrementCurrentIndex: 'quiz/incrementCurrentIndex'
+				incrementCurrentIndex: 'quiz/incrementCurrentIndex',
+				setCurrentIndex: 'quiz/setCurrentIndex',
 			}),
 			validate() {
 				if(this.userInput !== this.quizItem.value) {
@@ -114,6 +115,7 @@
 		watch: {
 			currentIndex(value) {
 				if(value === this.totalCount) {
+					this.setCurrentIndex(0)
 					this.$router.push('/sets/' + this.$route.params.id + '?quiz=true&errors=' + this.errorsCount + '&count=' + this.totalCount)
 				}
 			}
