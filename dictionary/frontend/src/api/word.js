@@ -5,5 +5,6 @@ export default {
 	edit: word => api.put(`words/${word.id}`, word),
 	list: () => api.get('words'),
 	get: id => api.get(`words/${id}`),
-	delete: id => api.delete(`words/${id}`)
+	getByValue: value => api.get(`words/find/${value}`),
+	delete: id => api.delete(`words/${id}`),
 }

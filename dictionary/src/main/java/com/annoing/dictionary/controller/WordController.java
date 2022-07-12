@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.annoing.dictionary.domain.User;
 import com.annoing.dictionary.domain.Word;
+import com.annoing.dictionary.domain.dto.WordBodyDto;
 import com.annoing.dictionary.domain.dto.WordEntryDto;
 import com.annoing.dictionary.domain.view.WordView;
 import com.annoing.dictionary.service.WordService;
@@ -63,6 +64,11 @@ public class WordController {
 	@DeleteMapping("{id}")
 	public void delete(@PathVariable Long id) {
 		wordService.remove(id);
+	}
+
+	@GetMapping("find/{value}")
+	public List<WordBodyDto> wordsByValue(@PathVariable String value) {
+		return wordService.getWordsByValue(value);
 	}
 
 }

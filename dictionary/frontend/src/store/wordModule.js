@@ -49,6 +49,14 @@ export default {
 				console.log(e)
 			}
 		},
+		async fetchByValue({commit}, value) {
+			try {
+				const response = await wordApi.getByValue(value)
+				commit('setWords', response.data)
+			} catch (e) {
+				console.log(e)
+			}
+		},
 		async createWord({commit}, word) {
 			try {
 				const response = await wordApi.create(word)

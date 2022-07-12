@@ -12,4 +12,6 @@ import com.annoing.dictionary.domain.dto.WordBodyDto;
 @Repository
 public interface WordRepo extends JpaRepository<Word, Long> {
 	List<WordBodyDto> findByWordsSet(WordsSet wordsSet);
+
+	List<WordBodyDto> findByValue(String value);
 }

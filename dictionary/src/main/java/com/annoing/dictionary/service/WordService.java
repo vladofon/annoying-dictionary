@@ -29,6 +29,10 @@ public class WordService {
 		return wordRepo.findByWordsSet(set);
 	}
 
+	public List<WordBodyDto> getWordsByValue(String value) {
+		return wordRepo.findByValue(value);
+	}
+
 	public Word get(Long id) {
 		return wordRepo.findById(id).get();
 	}
