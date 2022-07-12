@@ -78,4 +78,10 @@ public class WordsSetController {
 	public List<WordsSet> userSets(@PathVariable String id) {
 		return wordsSetService.getUserSets(id);
 	}
+
+	@GetMapping("find/{title}")
+	@JsonView(WordsSetView.QuickView.class)
+	public List<WordsSet> setsByTitle(@PathVariable String title) {
+		return wordsSetService.getSetsByTitle(title);
+	}
 }

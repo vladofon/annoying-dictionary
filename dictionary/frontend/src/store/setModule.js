@@ -66,6 +66,14 @@ export default {
 				console.log(e)
 			}
 		},
+		async fetchByTitle({commit}, title) {
+			try {
+				const response = await setApi.getByTitle(title)
+				commit('setSets', response.data)
+			} catch (e) {
+				console.log(e)
+			}
+		},
 		async fetchSet({commit}, id) {
 			try {
 				const response = await setApi.get(id)

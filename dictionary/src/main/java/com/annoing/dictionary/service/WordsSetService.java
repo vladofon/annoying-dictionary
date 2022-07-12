@@ -119,4 +119,8 @@ public class WordsSetService {
 		wordsSetRepo.saveAll(defaultSet);
 	}
 
+	public List<WordsSet> getSetsByTitle(String title) {
+		return wordsSetRepo.findByTitle(title);
+	}
+
 }
