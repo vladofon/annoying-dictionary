@@ -19,5 +19,8 @@ public interface WordsSetRepo extends JpaRepository<WordsSet, Long> {
 	List<WordsSet> findByAuthor(User author);
 
 	@Query
+	List<WordsSet> findByTitle(String title);
+
+	@Query
 	List<WordsSet> findByAuthorAndDefaultSetTrue(User author);
 }

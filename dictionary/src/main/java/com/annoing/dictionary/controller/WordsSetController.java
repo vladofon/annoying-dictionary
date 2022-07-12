@@ -47,38 +47,19 @@ public class WordsSetController {
 
 	@GetMapping("{id}")
 	public WordsSetDto getOne(@PathVariable Long id) {
-
-		WordsSet set = wordsSetService.getOne(id);
-		WordsSetDto dto = new WordsSetDto();
-
-		dto.setAuthorName(set.getAuthor().getName());
-		dto.setDefaultSet(set.isDefaultSet());
-		dto.setDescription(set.getDescription());
-		dto.setId(set.getId());
-		dto.setTitle(set.getTitle());
-		dto.setWords(wordService.getSetWords(set));
-
-		return dto;
+		return wordsSetService.getFullOne(id);
 	}
 
 	@PostMapping
 	@JsonView(WordsSetView.QuickView.class)
 	public WordsSet create(@RequestBody WordsSet wordsSet, @AuthenticationPrincipal User author) {
-		wordsSet.setAuthor(author);
-		wordsSet.setDefaultSet(false);
-
-		return wordsSetService.save(wordsSet);
+		return wordsSetService.create(wordsSet, author);
 	}
 
 	@PutMapping("{id}")
 	@JsonView(WordsSetView.QuickView.class)
 	public WordsSet update(@RequestBody WordsSet afterUpdate, @PathVariable Long id) {
-		WordsSet beforeUpdate = wordsSetService.getOne(id);
-
-		beforeUpdate.setDescription(afterUpdate.getDescription());
-		beforeUpdate.setTitle(afterUpdate.getTitle());
-
-		return wordsSetService.save(beforeUpdate);
+		return wordsSetService.update(afterUpdate, id);
 	}
 
 	@PutMapping("{id}/default")
@@ -95,13 +76,6 @@ public class WordsSetController {
 	@GetMapping("user/{id}")
 	@JsonView(WordsSetView.QuickView.class)
 	public List<WordsSet> userSets(@PathVariable String id) {
-		User user = userService.getUser(id);
-		List<WordsSet> sets = wordsSetService.userSets(user);
-
-		if (sets.isEmpty()) {
-			sets.add(wordsSetService.createDefaultSet(user));
-		}
-
-		return sets;
+		return wordsSetService.getUserSets(id);
 	}
 }
