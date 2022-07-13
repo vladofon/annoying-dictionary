@@ -7,6 +7,7 @@ export default {
 	listByUser: id => api.get(`sets/user/${id}`, {withCredentials: true}),
 	get: id => api.get(`sets/${id}`, {withCredentials: true}),
 	getByTitle: title => api.get(`sets/find/${title}`, {withCredentials: true}),
+	getSampleByTitle: title => api.get(`sets/find/${title}?limit=3`, {withCredentials: true}),
 	delete: id => api.delete(`sets/${id}`, {withCredentials: true}),
 	setDefault: id => api.put(`sets/${id}/default`, {withCredentials: true}),
 }

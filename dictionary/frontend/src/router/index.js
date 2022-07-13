@@ -6,6 +6,7 @@ import SetsPage from '@/router/SetsPage.vue'
 import QuizPage from '@/router/QuizPage.vue'
 import SetPage from '@/router/SetPage.vue'
 import ProfilePage from '@/router/ProfilePage.vue'
+import SearchPage from '@/router/SearchPage.vue'
 
 const routes = [
   {path: '/', component: MainPage},
@@ -15,6 +16,7 @@ const routes = [
   {path: '/sets/:id', component: SetPage},
   {path: '/quiz/:id', component: QuizPage},
   {path: '/profile', component: ProfilePage},
+  {path: '/search/:value', component: SearchPage},
 ]
 
 const router = createRouter({

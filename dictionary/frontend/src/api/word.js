@@ -6,5 +6,6 @@ export default {
 	list: () => api.get('words'),
 	get: id => api.get(`words/${id}`),
 	getByValue: value => api.get(`words/find/${value}`),
+	getSampleByValue: value => api.get(`words/find/${value}?limit=3`),
 	delete: id => api.delete(`words/${id}`),
 }

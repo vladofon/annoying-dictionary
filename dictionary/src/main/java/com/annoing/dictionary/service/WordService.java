@@ -2,6 +2,7 @@ package com.annoing.dictionary.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.annoing.dictionary.domain.User;
@@ -14,10 +15,16 @@ import com.annoing.dictionary.repo.WordRepo;
 @Service
 public class WordService {
 	private final WordRepo wordRepo;
-	private final WordsSetService wordsSetService;
+	private WordsSetService wordsSetService;
 
-	public WordService(WordRepo wordRepo, WordsSetService wordsSetService) {
+	@Autowired
+	public WordService(WordRepo wordRepo) {
 		this.wordRepo = wordRepo;
+
+	}
+
+	@Autowired
+	public void setWordsSetService(WordsSetService wordsSetService) {
 		this.wordsSetService = wordsSetService;
 	}
 
@@ -31,6 +38,14 @@ public class WordService {
 
 	public List<WordBodyDto> getWordsByValue(String value) {
 		return wordRepo.findByValue(value);
+	}
+
+	public List<WordBodyDto> getWordsByValue(String value, Long limit) {
+		if (limit > 0) {
+			return wordRepo.findByValue(value, limit);
+		}
+
+		return getWordsByValue(value);
 	}
 
 	public Word get(Long id) {

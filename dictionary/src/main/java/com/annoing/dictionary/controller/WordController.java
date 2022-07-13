@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.annoing.dictionary.domain.User;
@@ -67,8 +68,8 @@ public class WordController {
 	}
 
 	@GetMapping("find/{value}")
-	public List<WordBodyDto> wordsByValue(@PathVariable String value) {
-		return wordService.getWordsByValue(value);
+	public List<WordBodyDto> wordsByValue(@PathVariable String value, @RequestParam(defaultValue = "0") Long limit) {
+		return wordService.getWordsByValue(value, limit);
 	}
 
 }

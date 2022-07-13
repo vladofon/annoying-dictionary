@@ -25,10 +25,10 @@ import com.annoing.dictionary.service.WordsSetService;
 @EnableOAuth2Sso
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-	private final WordsSetService wordsSetService;
+	private WordsSetService wordsSetService;
 
 	@Autowired
-	WebSecurityConfig(WordsSetService wordsSetService) {
+	void setWordsSetService(WordsSetService wordsSetService) {
 		this.wordsSetService = wordsSetService;
 	}
 

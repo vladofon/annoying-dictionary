@@ -57,6 +57,14 @@ export default {
 				console.log(e)
 			}
 		},
+		async fetchWordsSample({commit}, value) {
+			try {
+				const response = await wordApi.getSampleByValue(value)
+				commit('setWords', response.data)
+			} catch (e) {
+				console.log(e)
+			}
+		},
 		async createWord({commit}, word) {
 			try {
 				const response = await wordApi.create(word)

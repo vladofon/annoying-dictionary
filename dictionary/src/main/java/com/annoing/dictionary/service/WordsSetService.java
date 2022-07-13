@@ -13,18 +13,27 @@ import com.annoing.dictionary.repo.WordsSetRepo;
 
 @Service
 public class WordsSetService {
-	private final WordService wordService;
-	private final UserService userService;
+	private WordService wordService;
+	private UserService userService;
 	private final WordsSetRepo wordsSetRepo;
 	private final UserDetailsRepo userRepo;
 
 	@Autowired
-	public WordsSetService(WordService wordService, UserService userService, WordsSetRepo wordsSetRepo,
-			UserDetailsRepo userRepo) {
-		this.wordService = wordService;
+	public WordsSetService(WordsSetRepo wordsSetRepo, UserDetailsRepo userRepo) {
+
 		this.wordsSetRepo = wordsSetRepo;
-		this.userService = userService;
+
 		this.userRepo = userRepo;
+	}
+
+	@Autowired
+	public void setWordService(WordService wordService) {
+		this.wordService = wordService;
+	}
+
+	@Autowired
+	public void setUserService(UserService userService) {
+		this.userService = userService;
 	}
 
 	public List<WordsSet> getAll() {
@@ -121,6 +130,14 @@ public class WordsSetService {
 
 	public List<WordsSet> getSetsByTitle(String title) {
 		return wordsSetRepo.findByTitle(title);
+	}
+
+	public List<WordsSet> getSetsByTitle(String title, Long limit) {
+		if (limit > 0) {
+			return wordsSetRepo.findByTitle(title, limit);
+		}
+
+		return getSetsByTitle(title);
 	}
 
 }

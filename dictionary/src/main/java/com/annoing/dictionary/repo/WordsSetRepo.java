@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.annoing.dictionary.domain.User;
@@ -20,6 +21,9 @@ public interface WordsSetRepo extends JpaRepository<WordsSet, Long> {
 
 	@Query
 	List<WordsSet> findByTitle(String title);
+
+	@Query(nativeQuery = true, value = "SELECT FROM words_set WS where WS.title = :title LIMIT :limit")
+	List<WordsSet> findByTitle(@Param("title") String title, @Param("limit") Long limit);
 
 	@Query
 	List<WordsSet> findByAuthorAndDefaultSetTrue(User author);
