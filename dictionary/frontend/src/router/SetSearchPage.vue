@@ -17,7 +17,7 @@
 			...mapActions('set', ['fetchByTitle'])
 		},
 		created() {
-			this.fetchByValue(this.$route.params.title)
+			this.fetchByTitle(this.$route.params.value)
 		}
 	}
 </script>

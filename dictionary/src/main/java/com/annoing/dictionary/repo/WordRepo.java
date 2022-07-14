@@ -17,6 +17,6 @@ public interface WordRepo extends JpaRepository<Word, Long> {
 
 	List<WordBodyDto> findByValue(String value);
 
-	@Query(nativeQuery = true, value = "SELECT FROM word W where W.value = :value LIMIT :limit")
-	List<WordBodyDto> findByValue(@Param("value") String value, @Param("limit") Long limit);
+	@Query(nativeQuery = true, value = "SELECT * FROM word WHERE value = :value LIMIT :limit")
+	List<Word> findByValue(@Param("value") String value, @Param("limit") Long limit);
 }

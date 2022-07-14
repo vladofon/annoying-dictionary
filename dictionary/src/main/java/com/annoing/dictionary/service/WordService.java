@@ -3,6 +3,7 @@ package com.annoing.dictionary.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import com.annoing.dictionary.domain.User;
@@ -23,6 +24,7 @@ public class WordService {
 
 	}
 
+	@Lazy
 	@Autowired
 	public void setWordsSetService(WordsSetService wordsSetService) {
 		this.wordsSetService = wordsSetService;
@@ -42,7 +44,7 @@ public class WordService {
 
 	public List<WordBodyDto> getWordsByValue(String value, Long limit) {
 		if (limit > 0) {
-			return wordRepo.findByValue(value, limit);
+			return wordRepo.findByValue(value, limit).stream().map(WordBodyDto::new).toList();
 		}
 
 		return getWordsByValue(value);

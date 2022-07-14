@@ -22,7 +22,7 @@ public interface WordsSetRepo extends JpaRepository<WordsSet, Long> {
 	@Query
 	List<WordsSet> findByTitle(String title);
 
-	@Query(nativeQuery = true, value = "SELECT FROM words_set WS where WS.title = :title LIMIT :limit")
+	@Query(nativeQuery = true, value = "SELECT * FROM words_set WHERE title = :title LIMIT :limit")
 	List<WordsSet> findByTitle(@Param("title") String title, @Param("limit") Long limit);
 
 	@Query

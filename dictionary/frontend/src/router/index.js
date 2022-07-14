@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import MainPage from '@/router/MainPage.vue'
 import WordsPage from '@/router/WordsPage.vue'
 import WordSearchPage from '@/router/WordSearchPage.vue'
+import SetSearchPage from '@/router/SetSearchPage.vue'
 import SetsPage from '@/router/SetsPage.vue'
 import QuizPage from '@/router/QuizPage.vue'
 import SetPage from '@/router/SetPage.vue'
@@ -13,6 +14,7 @@ const routes = [
   {path: '/words', component: WordsPage},
   {path: '/words/find/:value', component: WordSearchPage},
   {path: '/sets', component: SetsPage},
+  {path: '/sets/find/:value', component: SetSearchPage},
   {path: '/sets/:id', component: SetPage},
   {path: '/quiz/:id', component: QuizPage},
   {path: '/profile', component: ProfilePage},
