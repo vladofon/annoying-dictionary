@@ -18,13 +18,15 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
+			<v-text-field
+				@click:append-outer="search"
+				@keyup.enter="search"
+				v-model="searchValue"
+				label="Search"
+				variant="outlined"
+				append-outer-icon="mdi-magnify"
+				class="mr-3"
+			></v-text-field>
 
       <v-btn icon>
 				<a v-if="!isAuthenticated" @click.prevent="login">
@@ -64,6 +66,7 @@
 		data () {
 			return {
 				drawer: null,
+				searchValue: '',
 			}
 		},
 		computed: {
@@ -75,6 +78,10 @@
 			},
 			logout() {
 				window.location.href = "http://localhost:8080/logout";
+			},
+			search() {
+				this.$router.push('/search/' + this.searchValue)
+				this.searchValue = ''
 			}
 		}
 	}
