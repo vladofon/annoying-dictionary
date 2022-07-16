@@ -9,7 +9,7 @@
 					<v-btn flat class="ml-1" icon="mdi-volume-high"></v-btn>
 					<v-spacer></v-spacer>
 					
-					<app-menu>
+					<app-menu v-if="isUserWord(word.setId)">
 						<app-menu-item @action="deleteWord(word.id)" :color="'red'" :text="'Delete'" />
 						<app-menu-item @action="editWord" :color="'orange'" :text="'Edit'" />
 					</app-menu>
@@ -41,16 +41,28 @@
 			AppMenuItem
 		},
 		props: ['word'],
+		computed: {
+			...mapGetters('set', ['operableSet']),
+			...mapGetters('set', ['set']),
+			...mapGetters('profile', ['profile']),
+		},
 		methods: {
 			...mapMutations('word', ['setDialogMode', 'setOperableWord']),
 			...mapActions('word', ['deleteWord']),
 			...mapMutations(['switchDialog']),
-			...mapGetters('set', ['operableSet']),
 			
 			editWord() {
 				this.setDialogMode(DialogModes.EDIT)
 				this.setOperableWord({id:this.word.id, setId: this.operableSet.id, value:this.word.value, context:this.word.context})
 				this.switchDialog(true)
+			},
+			
+			isUserWord(id) {
+				if(this.set(this.word.setId).author.id === this.profile.id) {
+					return true
+				}
+				
+				return false
 			}
 		}
 	}

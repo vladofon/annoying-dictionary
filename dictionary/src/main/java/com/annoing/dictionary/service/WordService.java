@@ -72,8 +72,12 @@ public class WordService {
 		return wordRepo.save(created);
 	}
 
-	public Word update(Word word, Long id) {
+	public Word update(Word word, Long id, User author) {
 		Word beforeUpdate = get(id);
+
+		if (!beforeUpdate.getSet().getAuthor().equals(author)) {
+			throw new IllegalArgumentException("You are not author of this word!");
+		}
 
 		beforeUpdate.setValue(word.getValue());
 		beforeUpdate.setContext(word.getContext());
@@ -81,7 +85,13 @@ public class WordService {
 		return wordRepo.save(beforeUpdate);
 	}
 
-	public void remove(Long id) {
+	public void remove(Long id, User author) {
+		Word beforeUpdate = get(id);
+
+		if (!beforeUpdate.getSet().getAuthor().equals(author)) {
+			throw new IllegalArgumentException("You are not author of this word!");
+		}
+
 		wordRepo.deleteById(id);
 	}
 

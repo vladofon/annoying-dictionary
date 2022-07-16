@@ -59,19 +59,20 @@ public class WordsSetController {
 
 	@PutMapping("{id}")
 	@JsonView(WordsSetView.QuickView.class)
-	public WordsSet update(@RequestBody WordsSet afterUpdate, @PathVariable Long id) {
-		return wordsSetService.update(afterUpdate, id);
+	public WordsSet update(@RequestBody WordsSet afterUpdate, @PathVariable Long id,
+			@AuthenticationPrincipal User author) {
+		return wordsSetService.update(afterUpdate, id, author);
 	}
 
 	@PutMapping("{id}/default")
 	@JsonView(WordsSetView.QuickView.class)
-	public WordsSet setDefault(@PathVariable Long id) {
-		return wordsSetService.markAsDefault(wordsSetService.getOne(id));
+	public WordsSet setDefault(@PathVariable Long id, @AuthenticationPrincipal User author) {
+		return wordsSetService.markAsDefault(wordsSetService.getOne(id), author);
 	}
 
 	@DeleteMapping("{id}")
-	public void delete(@PathVariable Long id) {
-		wordsSetService.remove(id);
+	public void delete(@PathVariable Long id, @AuthenticationPrincipal User author) {
+		wordsSetService.remove(id, author);
 	}
 
 	@GetMapping("user/{id}")

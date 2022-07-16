@@ -5,6 +5,8 @@ import com.annoing.dictionary.domain.Word;
 public class WordBodyDto {
 	private Long id;
 
+	private Long setId;
+
 	private String value;
 
 	private String context;
@@ -16,6 +18,7 @@ public class WordBodyDto {
 		this.id = word.getId();
 		this.value = word.getValue();
 		this.context = word.getContext();
+		this.setId = word.getSet().getId();
 	}
 
 	public Long getId() {
@@ -40,6 +43,14 @@ public class WordBodyDto {
 
 	public void setContext(String context) {
 		this.context = context;
+	}
+
+	public Long getSetId() {
+		return setId;
+	}
+
+	public void setSetId(Long setId) {
+		this.setId = setId;
 	}
 
 }

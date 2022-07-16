@@ -23,7 +23,7 @@
       
       <v-spacer></v-spacer>
       
-			<app-menu>
+			<app-menu v-if="isUserSet(set.id)">
 				<app-menu-item v-if="!set.defaultSet" @action="deleteSet(set.id)" :color="'red'" :text="'Delete'"/>
 				<app-menu-item @action="editSet" :color="'orange'" :text="'Edit'"/>
 				<app-menu-item v-if="!set.defaultSet" @action="makeDefault" :color="'orange'" :text="'Mark as default'"/>
@@ -85,7 +85,8 @@
 		},
 		props: ['set'],
 		computed: {
-			...mapGetters('set', ['sets', 'defaultSet'])
+			...mapGetters('set', ['sets', 'defaultSet']),
+			...mapGetters('profile', ['profile']),
 		},
 		methods: {
 			...mapMutations('set', ['setOperableSet', 'setDialogMode', 'updateSet']),
@@ -113,6 +114,14 @@
 				})
 				
 				this.makeDefaultSet(this.set.id)
+			},
+			
+			isUserSet(id) {
+				if(this.profile.id === id) {
+					return true
+				}
+				
+				return false
 			}
 		}
 	}

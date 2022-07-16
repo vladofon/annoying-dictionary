@@ -58,13 +58,13 @@ public class WordController {
 
 	@PutMapping("{id}")
 	@JsonView(WordView.QuickView.class)
-	public Word edit(@RequestBody Word word, @PathVariable Long id) {
-		return wordService.update(word, id);
+	public Word edit(@RequestBody Word word, @PathVariable Long id, @AuthenticationPrincipal User author) {
+		return wordService.update(word, id, author);
 	}
 
 	@DeleteMapping("{id}")
-	public void delete(@PathVariable Long id) {
-		wordService.remove(id);
+	public void delete(@PathVariable Long id, @AuthenticationPrincipal User author) {
+		wordService.remove(id, author);
 	}
 
 	@GetMapping("find/{value}")

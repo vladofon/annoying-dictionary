@@ -70,8 +70,12 @@ public class WordsSetService {
 		return wordsSetRepo.save(wordsSet);
 	}
 
-	public WordsSet update(WordsSet afterUpdate, Long id) {
+	public WordsSet update(WordsSet afterUpdate, Long id, User author) {
 		WordsSet beforeUpdate = getOne(id);
+
+		if (!beforeUpdate.getAuthor().equals(author)) {
+			throw new IllegalArgumentException("You are not author of this set!");
+		}
 
 		beforeUpdate.setDescription(afterUpdate.getDescription());
 		beforeUpdate.setTitle(afterUpdate.getTitle());
@@ -79,7 +83,13 @@ public class WordsSetService {
 		return wordsSetRepo.save(beforeUpdate);
 	}
 
-	public void remove(Long id) {
+	public void remove(Long id, User author) {
+		WordsSet beforeUpdate = getOne(id);
+
+		if (!beforeUpdate.getAuthor().equals(author)) {
+			throw new IllegalArgumentException("You are not author of this set!");
+		}
+
 		if (!getOne(id).isDefaultSet())
 			wordsSetRepo.deleteById(id);
 	}
@@ -101,7 +111,11 @@ public class WordsSetService {
 		return wordsSetRepo.findByAuthorAndDefaultSetTrue(author).get(0);
 	}
 
-	public WordsSet markAsDefault(WordsSet set) {
+	public WordsSet markAsDefault(WordsSet set, User author) {
+		if (!set.getAuthor().equals(author)) {
+			throw new IllegalArgumentException("You are not author of this set!");
+		}
+
 		dropDefaultSet(set.getAuthor());
 
 		set.setDefaultSet(true);

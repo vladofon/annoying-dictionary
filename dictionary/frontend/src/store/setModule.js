@@ -16,6 +16,9 @@ export default {
 		sets(state) {
 			return [...state.sets].sort((a,b) => a.id - b.id)
 		},
+		set(state, id) {
+			return [...state.sets].find(item => item.id === id)
+		},
 		operableSet(state) {
 			return state.operableSet
 		},
