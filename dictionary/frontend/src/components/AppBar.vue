@@ -19,12 +19,13 @@
       <v-spacer></v-spacer>
 
 			<v-text-field
-				@click:append-outer="search"
+				@click:prepend-inner="search"
 				@keyup.enter="search"
 				v-model="searchValue"
 				label="Search"
 				variant="outlined"
-				append-outer-icon="mdi-magnify"
+				density="compact"
+				prepend-inner-icon="mdi-magnify"
 				class="mr-3"
 			></v-text-field>
 
