@@ -9,7 +9,7 @@
 					<v-btn flat class="ml-1" icon="mdi-volume-high"></v-btn>
 					<v-spacer></v-spacer>
 					
-					<app-menu v-if="isUserWord(word.setId)">
+					<app-menu v-if="isUserWord">
 						<app-menu-item @action="deleteWord(word.id)" :color="'red'" :text="'Delete'" />
 						<app-menu-item @action="editWord" :color="'orange'" :text="'Edit'" />
 					</app-menu>
@@ -57,7 +57,7 @@
 				this.switchDialog(true)
 			},
 			
-			isUserWord(id) {
+			isUserWord() {
 				if(this.set(this.word.setId).author.id === this.profile.id) {
 					return true
 				}

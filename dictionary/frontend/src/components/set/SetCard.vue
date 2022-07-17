@@ -23,7 +23,7 @@
       
       <v-spacer></v-spacer>
       
-			<app-menu v-if="isUserSet(set.id)">
+			<app-menu v-if="isUserSet">
 				<app-menu-item v-if="!set.defaultSet" @action="deleteSet(set.id)" :color="'red'" :text="'Delete'"/>
 				<app-menu-item @action="editSet" :color="'orange'" :text="'Edit'"/>
 				<app-menu-item v-if="!set.defaultSet" @action="makeDefault" :color="'orange'" :text="'Mark as default'"/>
@@ -116,8 +116,8 @@
 				this.makeDefaultSet(this.set.id)
 			},
 			
-			isUserSet(id) {
-				if(this.profile.id === id) {
+			isUserSet() {
+				if(this.profile.id === this.set.author.id) {
 					return true
 				}
 				

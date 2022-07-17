@@ -100,7 +100,7 @@ public class WordsSetService {
 		defaultSet.setDescription("You can save your words here");
 		defaultSet.setAuthor(user);
 
-		user.getSets().add(markAsDefault(defaultSet));
+		user.getSets().add(markAsDefault(defaultSet, user));
 
 		userRepo.save(user);
 
