@@ -8,6 +8,7 @@ import QuizPage from '@/router/QuizPage.vue'
 import SetPage from '@/router/SetPage.vue'
 import ProfilePage from '@/router/ProfilePage.vue'
 import SearchPage from '@/router/SearchPage.vue'
+import PeoplePage from '@/router/PeoplePage.vue'
 
 const routes = [
   {path: '/', component: MainPage},
@@ -19,6 +20,7 @@ const routes = [
   {path: '/quiz/:id', component: QuizPage},
   {path: '/profile', component: ProfilePage},
   {path: '/search/:value', component: SearchPage},
+  {path: '/people', component: PeoplePage},
 ]
 
 const router = createRouter({

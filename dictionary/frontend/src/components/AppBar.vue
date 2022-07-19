@@ -54,6 +54,7 @@
       <v-list-item @click="$router.push('/profile')" prepend-icon="mdi-account-box" title="Profile" value="profile"></v-list-item>
       <v-list-item @click="$router.push('/sets')" prepend-icon="mdi-view-dashboard" title="Sets" value="sets"></v-list-item>
       <v-list-item @click="$router.push('/words')" prepend-icon="mdi-forum" title="Words" value="words"></v-list-item>
+      <v-list-item @click="$router.push('/people')" prepend-icon="mdi-account-group" title="People" value="people"></v-list-item>
     </v-list>
   </v-navigation-drawer>
   
