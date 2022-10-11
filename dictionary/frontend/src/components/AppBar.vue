@@ -76,10 +76,10 @@
 		},
 		methods: {
 			login() {
-				window.location.href = "http://localhost:8080/sessions/Google/callback";
+				window.location.href = process.env.BACKEND_URL + "sessions/Google/callback";
 			},
 			logout() {
-				window.location.href = "http://localhost:8080/logout";
+				window.location.href = process.env.BACKEND_URL + "logout";
 			},
 			search() {
 				this.$router.push('/search/' + this.searchValue)
