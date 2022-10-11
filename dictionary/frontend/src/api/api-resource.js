@@ -1,6 +1,6 @@
 import axios from 'axios' 
 
 export const api = new axios.create({
-	baseURL: process.env.BACKEND_URL,
+	baseURL: process.env.VUE_APP_BACKEND_URL,
 	withCredentials: true
 })

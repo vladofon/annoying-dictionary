@@ -76,10 +76,10 @@
 		},
 		methods: {
 			login() {
-				window.location.href = process.env.BACKEND_URL + "sessions/Google/callback";
+				window.location.href = process.env.VUE_APP_BACKEND_URL + "sessions/Google/callback";
 			},
 			logout() {
-				window.location.href = process.env.BACKEND_URL + "logout";
+				window.location.href = process.env.VUE_APP_BACKEND_URL + "logout";
 			},
 			search() {
 				this.$router.push('/search/' + this.searchValue)
