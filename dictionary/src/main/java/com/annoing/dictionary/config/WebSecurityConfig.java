@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.PrincipalExtractor;
 import org.springframework.context.annotation.Bean;
@@ -24,6 +25,8 @@ import com.annoing.dictionary.service.WordsSetService;
 @EnableWebSecurity
 @EnableOAuth2Sso
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+	@Value("${frontend.url}")
+	private String frontendUrl;
 
 	private WordsSetService wordsSetService;
 
@@ -35,8 +38,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.antMatcher("/**").authorizeRequests().antMatchers("/", "/login**", "/js/**", "/error**", "/sessions/me")
-				.permitAll().anyRequest().authenticated().and().logout().logoutSuccessUrl("http://localhost:8081/").permitAll()
-				.and().logout().deleteCookies("JSESSIONID").and().rememberMe().key("uniqueAndSecret").and().csrf().disable();
+				.permitAll().anyRequest().authenticated().and().logout().logoutSuccessUrl(frontendUrl + "/").permitAll().and()
+				.logout().deleteCookies("JSESSIONID").and().rememberMe().key("uniqueAndSecret").and().csrf().disable();
 	}
 
 	@Bean
@@ -83,6 +86,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		List<String> allowedOriginsUrl = new ArrayList<>();
 		allowedOriginsUrl.add("http://localhost:8081/");
 		allowedOriginsUrl.add("http://192.192.168.2.104:8081/");
+		allowedOriginsUrl.add(frontendUrl + "/");
 		configuration.setAllowedOrigins(allowedOriginsUrl);
 		configuration.setAllowedMethods(allowedMethods);
 		configuration.setAllowCredentials(true);
