@@ -5,6 +5,7 @@ import java.util.Collections;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -21,6 +22,8 @@ import com.fasterxml.jackson.annotation.JsonView;
 @Controller
 @RequestMapping("/")
 public class MainController {
+	@Value("${frontend.url}")
+	private String frontendUrl;
 
 	@GetMapping("sessions/me")
 	@JsonView(UserView.ProfileView.class)
@@ -33,6 +36,6 @@ public class MainController {
 
 	@GetMapping("sessions/Google/callback")
 	public void googleCallback(HttpServletResponse response) throws IOException {
-		response.sendRedirect("http://localhost:8081/profile");
+		response.sendRedirect(frontendUrl + "/profile");
 	}
 }
