@@ -1,13 +1,20 @@
 const { defineConfig } = require('@vue/cli-service')
+const Dotenv = require('dotenv-webpack');
+
 module.exports = defineConfig({
   transpileDependencies: true,
   devServer: {
     compress: true,
     port: 8081,
     allowedHosts: [
-      'localhost:8080'
+      process.env.VUE_APP_BACKEND_URL
     ],
-    proxy: 'http://localhost:8080/',
+    proxy: process.env.VUE_APP_BACKEND_URL,
+  },
+  configureWebpack: {
+    plugins: [
+      new Dotenv()
+    ]
   },
   pluginOptions: {
     vuetify: {
