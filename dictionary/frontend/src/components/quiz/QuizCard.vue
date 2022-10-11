@@ -46,7 +46,7 @@
 						<v-btn @click="validate" :color="(confirmButton) ? 'teal' : disabledColor" :disabled="!confirmButton" :flat="!confirmButton">
 							Confirm
 						</v-btn>
-						<v-btn :color="(rejectButton) ? 'red' : disabledColor" :disabled="!rejectButton" :flat="!rejectButton">
+						<v-btn @click="reject" :color="(rejectButton) ? 'red' : disabledColor" :disabled="!rejectButton" :flat="!rejectButton">
 							I don't know
 						</v-btn>
 					</div>
@@ -95,6 +95,17 @@
 					this.confirmButton = false
 					this.rejectButton = false
 				}
+				
+				setTimeout(() => {this.nextCard()}, 2000)
+			},
+			reject() {
+				console.log(this.userInput + ' !== ' + this.quizItem.title)
+				this.fieldColor = 'red'
+				this.bgColor = 'bg-red-lighten-4'
+				this.confirmButton = false
+				this.rejectButton = false
+				this.errorsCount++
+				this.userInput = this.quizItem.value
 				
 				setTimeout(() => {this.nextCard()}, 2000)
 			},

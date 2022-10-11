@@ -44,6 +44,7 @@ export default {
 		async fetchWords({commit}) {
 			try {
 				const response = await wordApi.list()
+				console.log(response.data)
 				commit('setWords', response.data)
 			} catch (e) {
 				console.log(e)
@@ -60,6 +61,7 @@ export default {
 		async fetchWordsSample({commit}, value) {
 			try {
 				const response = await wordApi.getSampleByValue(value)
+				console.log(response.data)
 				commit('setWords', response.data)
 			} catch (e) {
 				console.log(e)

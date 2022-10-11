@@ -42,8 +42,8 @@ public class WordsSetController {
 
 	@GetMapping
 	@JsonView(WordsSetView.QuickView.class)
-	public List<WordsSet> list() {
-		return wordsSetService.getAll();
+	public List<WordsSet> list(@AuthenticationPrincipal User author) {
+		return wordsSetService.getUserSets(author.getId());
 	}
 
 	@GetMapping("{id}")

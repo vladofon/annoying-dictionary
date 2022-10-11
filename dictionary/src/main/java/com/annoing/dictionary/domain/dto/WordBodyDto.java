@@ -53,4 +53,9 @@ public class WordBodyDto {
 		this.setId = setId;
 	}
 
+	@Override
+	public String toString() {
+		return "WordBodyDto [id=" + id + "]";
+	}
+
 }

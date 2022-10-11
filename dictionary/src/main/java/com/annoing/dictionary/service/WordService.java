@@ -1,6 +1,8 @@
 package com.annoing.dictionary.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -44,7 +46,7 @@ public class WordService {
 
 	public List<WordBodyDto> getWordsByValue(String value, Long limit) {
 		if (limit > 0) {
-			return wordRepo.findByValue(value, limit).stream().map(WordBodyDto::new).toList();
+			return wordRepo.findByValue(value, limit).stream().map(WordBodyDto::new).collect(Collectors.toList());
 		}
 
 		return getWordsByValue(value);
@@ -93,6 +95,19 @@ public class WordService {
 		}
 
 		wordRepo.deleteById(id);
+	}
+
+	public List<WordBodyDto> getUserWords(User author) {
+		List<WordsSet> sets = wordsSetService.getUserSets(author.getId());
+
+		List<WordBodyDto> words = new ArrayList<>();
+		for (WordsSet set : sets) {
+			words.addAll(wordRepo.findByWordsSet(set));
+		}
+
+		words.forEach(System.out::println);
+
+		return words;
 	}
 
 }

@@ -39,9 +39,8 @@ public class WordController {
 	}
 
 	@GetMapping
-	@JsonView(WordView.QuickView.class)
-	public List<Word> list() {
-		return wordService.getAll();
+	public List<WordBodyDto> list(@AuthenticationPrincipal User author) {
+		return wordService.getUserWords(author);
 	}
 
 	@GetMapping("{id}")
