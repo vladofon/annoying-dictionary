@@ -36,6 +36,6 @@ public class MainController {
 
 	@GetMapping("sessions/Google/callback")
 	public void googleCallback(HttpServletResponse response) throws IOException {
-		response.sendRedirect(frontendUrl + "/profile");
+		response.sendRedirect(frontendUrl + "/#/profile");
 	}
 }
