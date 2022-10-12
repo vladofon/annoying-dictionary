@@ -10,7 +10,7 @@
         ></v-img>
       </template>
 
-      <template v-slot:prepend>
+      <template v-slot:prepend v-if="isAuthenticated">
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       </template>
 
@@ -40,6 +40,7 @@
     </v-app-bar>
     
     <v-navigation-drawer
+			v-if="isAuthenticated"
 			v-model="drawer"
 			temporary
 		>
