@@ -6,7 +6,7 @@
 				<h3 class="text-white" style="margin: auto 0">Profile</h3>
 				<v-spacer></v-spacer>
 				<div>
-					<v-btn @click="editProfile" rounded="pill" class="text-black">
+					<v-btn v-if="false" click="editProfile"  rounded="pill" class="text-black">
 						<v-icon color="black">mdi-plus</v-icon>
 						Change info
 					</v-btn>
